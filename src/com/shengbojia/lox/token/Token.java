@@ -1,6 +1,6 @@
-package com.shengbojia.lox;
+package com.shengbojia.lox.token;
 
 public class Token {
 }
 
-class 
+
