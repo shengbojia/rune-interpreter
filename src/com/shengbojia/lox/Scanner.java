@@ -119,8 +119,18 @@ public class Scanner {
                 line++;
                 break;
 
+            case '"': // Beginning of a string
+                handleString();
+                break;
+
             default:
-                Lox.error(line, "Unexpected character.");
+                if (isDigit(c)) {
+                    handleNumber();
+                } else if (isAlpha(c)) {
+                    handleIdentifier();
+                } else {
+                    Lox.error(line, "Unexpected character.");
+                }
                 break;
         }
     }
@@ -176,6 +186,7 @@ public class Scanner {
 
     /**
      * Look ahead by one character.
+     *
      * @return the character seen or '\0' if EOF
      */
     private char peek() {
@@ -186,5 +197,119 @@ public class Scanner {
         return source.charAt(current);
     }
 
+    /**
+     * Look ahead by inputted number of characters.
+     *
+     * @param distance how many characters to look ahead
+     * @return char seen or '\0' if looking at/beyond EOF
+     */
+    private char peekFurther(int distance) {
+        if (current + distance >= source.length()) {
+            return '\0';
+        }
+
+        return source.charAt(current + distance);
+    }
+
+    /**
+     * Consumes characters until a ", or EOF is reached. If a " is reached successfully, adds a string literal token
+     * composed of the consumed characters to the list of tokens. Otherwise reports an error.
+     */
+    private void handleString() {
+        while (peek() != '"' && !reachedEnd()) {
+            if (peek() == '\n') {
+                line++; // Lox supports multiline strings, unlike java
+            }
+            advance();
+        }
+
+        // Unterminated String
+        if (reachedEnd()) {
+            Lox.error(line, "Unterminated string.");
+            return;
+        }
+
+        // advance to the closing "
+        advance();
+
+        String value = source.substring(start + 1, current - 1);
+        addToken(STRING, value);
+    }
+
+    /**
+     * Checks if the inputted char is a numerical digit.
+     *
+     * @param toCheck the char to check
+     * @return true if input is a digit, false otherwise
+     */
+    private boolean isDigit(char toCheck) {
+        return toCheck >= '0' && toCheck <= '9';
+    }
+
+    /**
+     * Checks if the inputted char is an alphabetical letter or an underscore '_'.
+     *
+     * @param toCheck the char to check
+     * @return true if input is a letter or _, false otherwise
+     */
+    private boolean isAlpha(char toCheck) {
+        return (toCheck >= 'a' && toCheck <= 'z') ||
+                (toCheck >= 'A' && toCheck <= 'Z') ||
+                toCheck == '_';
+    }
+
+    /**
+     * Checks if the inputted char is alpha-numerical.
+     *
+     * @param toCheck the char to check
+     * @return true if input is alphanumeric, false otherwise
+     */
+    private boolean isAlphaNumeric(char toCheck) {
+        return isAlpha(toCheck) || isDigit(toCheck);
+    }
+
+    /**
+     * Consumes as many numerical digits as possible. If a decimal is reached, checks whether or not more digits follow
+     * the decimal, since Lox allows for number method calls. (eg 140.abs())
+     * <p>
+     * Lox has only floating point numbers. Allows for integer and decimal literals, but no leading/trailing decimals.
+     * eg. 555, 55.5 okay. But .555 or 555. are bad.
+     * <p>
+     * Also, negative numbers are considered an expression, so -100 is not a literal.
+     */
+    private void handleNumber() {
+        while (isDigit(peek())) {
+            advance();
+        }
+
+        // Look for decimals; Will be allowing extension calls like 140.abs() so make sure it's a numerical decimal
+        if (peek() == '.' && isDigit(peekFurther(1))) {
+
+            // Consume the decimal
+            advance();
+
+            // Consume the digits following the decimal
+            while (isDigit(peek())) {
+                advance();
+            }
+        }
+
+        addToken(NUMBER, Double.parseDouble(source.substring(start, current)));
+    }
+
+    /**
+     * Consumes characters (alphanumeric ones) part of an identifier lexeme. Then adds the lexeme as an
+     * identifier token to the list of tokens.
+     * <p>
+     * Lox allows for identifiers to start with an underscore. So _myVar is fine.
+     */
+    private void handleIdentifier() {
+
+        while (isAlphaNumeric(peek())) {
+            advance();
+        }
+
+        addToken(IDENTIFIER);
+    }
 
 }
