@@ -4,7 +4,9 @@ import com.shengbojia.lox.token.Token;
 import com.shengbojia.lox.token.TokenType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.shengbojia.lox.token.TokenType.*;
 
@@ -18,6 +20,28 @@ public class Scanner {
     private int start = 0;
     private int current = 0;
     private int line = 1;
+
+    private static final Map<String, TokenType> keywords;
+
+    static {
+        keywords = new HashMap<>();
+        keywords.put("and",    AND);
+        keywords.put("class",  CLASS);
+        keywords.put("else",   ELSE);
+        keywords.put("false",  FALSE);
+        keywords.put("for",    FOR);
+        keywords.put("fun",    FUN);
+        keywords.put("if",     IF);
+        keywords.put("nil",    NIL);
+        keywords.put("or",     OR);
+        keywords.put("print",  PRINT);
+        keywords.put("return", RETURN);
+        keywords.put("super",  SUPER);
+        keywords.put("this",   THIS);
+        keywords.put("true",   TRUE);
+        keywords.put("var",    VAR);
+        keywords.put("while",  WHILE);
+    }
 
     Scanner(String source) {
         this.source = source;
@@ -151,7 +175,7 @@ public class Scanner {
      * @param type the type of token to add to tokens
      */
     private void addToken(TokenType type) {
-
+        addToken(type, null);
     }
 
     /**
@@ -298,8 +322,8 @@ public class Scanner {
     }
 
     /**
-     * Consumes characters (alphanumeric ones) part of an identifier lexeme. Then adds the lexeme as an
-     * identifier token to the list of tokens.
+     * Consumes characters (alphanumeric ones) part of an identifier lexeme. Then checks if the lexeme is a keyword of
+     * Lox before adding the appropriate type of token to the list of tokens.
      * <p>
      * Lox allows for identifiers to start with an underscore. So _myVar is fine.
      */
@@ -309,7 +333,15 @@ public class Scanner {
             advance();
         }
 
-        addToken(IDENTIFIER);
+        // Get the lexeme
+        String text = source.substring(start, current);
+
+        // Find a matching keyword (if any)
+        TokenType type = keywords.get(text);
+        if (type == null) {
+            type = IDENTIFIER; // ie not a keyword
+        }
+        addToken(type);
     }
 
 }
