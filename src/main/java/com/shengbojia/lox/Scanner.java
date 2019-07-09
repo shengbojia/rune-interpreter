@@ -25,22 +25,22 @@ public class Scanner {
 
     static {
         keywords = new HashMap<>();
-        keywords.put("and",    AND);
-        keywords.put("class",  CLASS);
-        keywords.put("else",   ELSE);
-        keywords.put("false",  FALSE);
-        keywords.put("for",    FOR);
-        keywords.put("fun",    FUN);
-        keywords.put("if",     IF);
-        keywords.put("nil",    NIL);
-        keywords.put("or",     OR);
-        keywords.put("print",  PRINT);
+        keywords.put("and", AND);
+        keywords.put("class", CLASS);
+        keywords.put("else", ELSE);
+        keywords.put("false", FALSE);
+        keywords.put("for", FOR);
+        keywords.put("fun", FUN);
+        keywords.put("if", IF);
+        keywords.put("nil", NIL);
+        keywords.put("or", OR);
+        keywords.put("print", PRINT);
         keywords.put("return", RETURN);
-        keywords.put("super",  SUPER);
-        keywords.put("this",   THIS);
-        keywords.put("true",   TRUE);
-        keywords.put("var",    VAR);
-        keywords.put("while",  WHILE);
+        keywords.put("super", SUPER);
+        keywords.put("this", THIS);
+        keywords.put("true", TRUE);
+        keywords.put("var", VAR);
+        keywords.put("while", WHILE);
     }
 
     Scanner(String source) {
@@ -123,15 +123,8 @@ public class Scanner {
                 addToken(secondCharIs('=') ? GREATER_EQUAL : GREATER);
                 break;
 
-            case '/': // The / char could be the beginning of a comment, so check that.
-                if (secondCharIs('/')) {
-                    // Lox is C-style comments, so goes until end of line
-                    while ((peek() != '\n') && !reachedEnd()) {
-                        advance(); // Keep advancing until newline or EOF, thus ignoring the comment lexeme
-                    }
-                } else {
-                    addToken(SLASH);
-                }
+            case '/': // The / char could be the beginning of a comment
+                handleSlash();
                 break;
 
             case ' ': // Ignore whitespace
@@ -233,6 +226,34 @@ public class Scanner {
         }
 
         return source.charAt(current + distance);
+    }
+
+    /**
+     * Checks if the '/' is the start of a line comment, block comment, or neither. Ignores and advances through
+     * commented out text.
+     * <p>
+     * Lox follows C-style commenting, so supports // and /* .. * / comments.
+     */
+    private void handleSlash() {
+        // Single line comment
+        if (secondCharIs('/')) {
+            // Lox is C-style comments, so goes until end of line
+            while ((peek() != '\n') && !reachedEnd()) {
+                advance(); // Keep advancing until newline or EOF, thus ignoring the comment lexeme
+            }
+        } else if (secondCharIs('*')) {
+            // Block comments go until * / is reached
+            while (!reachedEnd()) {
+                if (peek() == '*' && peekFurther(1) == '/') {
+                    advance();
+                    advance();
+                    return;
+                }
+                advance();
+            }
+        } else {
+            addToken(SLASH);
+        }
     }
 
     /**
