@@ -1,11 +1,11 @@
 package com.shengbojia.lox.token;
 
 /**
- * Enum class of token types.
+ * Enum class of different lexeme types in Lox.
  */
 public enum TokenType {
 
-    // Single character tokens. eg ( ) { } , .
+    // Single character punctuation tokens. eg ( ) { } , .
     LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT_BRACE,
     COMMA, DOT, SEMICOLON,
 
