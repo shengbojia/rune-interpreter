@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8765254-c9e3-4554-8930-336eb2d76c90" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/expression/Expr.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/tool/GenerateAstCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/expression/Expr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/expression/Expr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/tool/GenerateAstCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/tool/GenerateAstCode.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -54,8 +53,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/shengbojia/tool/GenerateAstCode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="107" column="25" selection-start-line="107" selection-start-column="25" selection-end-line="107" selection-end-column="25" />
+            <state relative-caret-position="273">
+              <caret line="106" column="25" lean-forward="true" selection-start-line="106" selection-start-column="25" selection-end-line="106" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -66,14 +65,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/shengbojia/lox/expression/Expr.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="21" column="40" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
+            <state relative-caret-position="-33">
+              <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#497#498#0" expanded="true" />
-                <element signature="e#549#550#0" expanded="true" />
-                <element signature="e#660#661#0" expanded="true" />
-                <element signature="e#702#703#0" expanded="true" />
+                <element signature="e#577#578#0" expanded="true" />
+                <element signature="e#637#638#0" expanded="true" />
+                <element signature="e#804#805#0" expanded="true" />
+                <element signature="e#856#857#0" expanded="true" />
+                <element signature="e#900#901#0" expanded="true" />
+                <element signature="e#962#963#0" expanded="true" />
+                <element signature="e#1074#1075#0" expanded="true" />
+                <element signature="e#1116#1117#0" expanded="true" />
+                <element signature="e#1160#1161#0" expanded="true" />
+                <element signature="e#1221#1222#0" expanded="true" />
+                <element signature="e#1464#1465#0" expanded="true" />
+                <element signature="e#1523#1524#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -307,12 +314,12 @@
       <workItem from="1562628171247" duration="7259000" />
       <workItem from="1562645247761" duration="9535000" />
       <workItem from="1562814785734" duration="599000" />
-      <workItem from="1562885727247" duration="4286000" />
+      <workItem from="1562885727247" duration="6401000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21679000" />
+    <option name="totallyTimeSpent" value="23794000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -457,22 +464,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shengbojia/lox/expression/Expr.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="21" column="40" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
+        <state relative-caret-position="-33">
+          <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#497#498#0" expanded="true" />
-            <element signature="e#549#550#0" expanded="true" />
-            <element signature="e#660#661#0" expanded="true" />
-            <element signature="e#702#703#0" expanded="true" />
+            <element signature="e#577#578#0" expanded="true" />
+            <element signature="e#637#638#0" expanded="true" />
+            <element signature="e#804#805#0" expanded="true" />
+            <element signature="e#856#857#0" expanded="true" />
+            <element signature="e#900#901#0" expanded="true" />
+            <element signature="e#962#963#0" expanded="true" />
+            <element signature="e#1074#1075#0" expanded="true" />
+            <element signature="e#1116#1117#0" expanded="true" />
+            <element signature="e#1160#1161#0" expanded="true" />
+            <element signature="e#1221#1222#0" expanded="true" />
+            <element signature="e#1464#1465#0" expanded="true" />
+            <element signature="e#1523#1524#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shengbojia/tool/GenerateAstCode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="107" column="25" selection-start-line="107" selection-start-column="25" selection-end-line="107" selection-end-column="25" />
+        <state relative-caret-position="273">
+          <caret line="106" column="25" lean-forward="true" selection-start-line="106" selection-start-column="25" selection-end-line="106" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
