@@ -1,6 +1,5 @@
 package com.shengbojia.lox;
 
-import com.shengbojia.lox.Expr;
 import com.shengbojia.lox.token.Token;
 import com.shengbojia.lox.token.TokenType;
 
@@ -109,6 +108,9 @@ public class Parser {
             return new Expr.Unary(operator, right);
         }
 
+        // Make sure a binary operator does not appear at the start of an expression.
+        checkBinaryNoLeftError();
+
         return primary();
     }
 
@@ -155,6 +157,39 @@ public class Parser {
     private ParseError error(Token token, String msg) {
         Lox.error(token, msg);
         return new ParseError();
+    }
+
+    /**
+     * Checks if any binary operator lacks a left operand (appears at the beginning of an expression). If so, parses and
+     * discards the remaining right operand, and then throws a parse error.
+     */
+    private void checkBinaryNoLeftError() {
+
+        Token errorToken;
+
+        if (match(COMMA)) {
+            errorToken = previous();
+            conditional();
+        } else if (match(QUERY)) {
+            errorToken = previous();
+            expression();
+        } else if (match(BANG_EQUAL, EQUAL_EQUAL)) {
+            errorToken = previous();
+            comparison();
+        } else if (match(GREATER, GREATER_EQUAL, LESS, LESS_EQUAL)) {
+            errorToken = previous();
+            addition();
+        } else if (match(PLUS, MINUS)) {
+            errorToken = previous();
+            multiplication();
+        } else if (match(STAR, SLASH)) {
+            errorToken = previous();
+            unary();
+        } else {
+            return;
+        }
+
+        throw error(errorToken, "Expected a left operand.");
     }
 
     /**
