@@ -1,4 +1,4 @@
-package com.shengbojia.lox.expression;
+package com.shengbojia.lox;
 
 import com.shengbojia.lox.token.Token;
 

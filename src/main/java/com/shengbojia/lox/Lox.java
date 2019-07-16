@@ -1,7 +1,9 @@
 package com.shengbojia.lox;
 
 import com.shengbojia.lox.token.Token;
+import com.shengbojia.lox.token.TokenType;
 
+import javax.print.DocFlavor;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -55,21 +57,48 @@ public class Lox {
         Scanner scanner = new Scanner(source);
         List<Token> tokens = scanner.scanTokens();
 
-        // For now, just print the tokens.
-        for (Token token : tokens) {
-            System.out.println(token);
+        // For now, just print the expressions.
+        Parser parser = new Parser(tokens);
+        Expr expression = parser.parse();
+
+        if (hadError) {
+            return;
         }
+
+        System.out.println(new AstPrinter().print(expression));
     }
 
+    /**
+     * Reports an error with the given message at the given line.
+     *
+     * @param line the line the error occurred at
+     * @param msg the error message
+     */
     static void error(int line, String msg) {
         report(line, "", msg);
     }
 
     /**
+     * Reports an error which occurred at the given token, attached with the inputted error message.
+     *
+     * @param token the token the error occurred at
+     * @param msg the error message
+     */
+    static void error(Token token, String msg) {
+        if (token.type == TokenType.EOF) {
+            report(token.line, " at end", msg);
+
+        } else {
+            report(token.line, " at " + token.lexeme + "'", msg);
+        }
+    }
+
+    /**
+     * Displays an error based on the given inputs.
      *
      * @param line where error occurred
-     * @param where
-     * @param msg
+     * @param where where within the line the error occurred
+     * @param msg error message to display
      */
     private static void report(int line, String where, String msg) {
         System.err.println(
@@ -79,4 +108,52 @@ public class Lox {
         hadError = true;
     }
 
+}
+
+class AstPrinter implements Expr.Visitor<String> {
+
+    String print(Expr expr) {
+        return expr.accept(this);
+    }
+
+    @Override
+    public String visitBinaryExpr(Expr.Binary expr) {
+        return parenthesize(expr.operator.lexeme, expr.left, expr.right);
+    }
+
+    @Override
+    public String visitGroupingExpr(Expr.Grouping expr) {
+        return parenthesize("group", expr.expression);
+    }
+
+    @Override
+    public String visitLiteralExpr(Expr.Literal expr) {
+        if (expr.value == null) return "nil";
+        return expr.value.toString();
+    }
+
+    @Override
+    public String visitUnaryExpr(Expr.Unary expr) {
+        return parenthesize(expr.operator.lexeme, expr.right);
+    }
+
+    /**
+     * Formats the inputted expressions into a parenthesized, Polish notation string.
+     *
+     * @param name the associated tag/name of the expressions
+     * @param exprs the expressions to format
+     * @return a Polish notation formatted expression
+     */
+    private String parenthesize(String name, Expr... exprs) {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("(").append(name);
+        for (Expr expr : exprs) {
+            builder.append(" ");
+            builder.append(expr.accept(this));
+        }
+        builder.append(")");
+
+        return builder.toString();
+    }
 }
