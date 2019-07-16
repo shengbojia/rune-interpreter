@@ -26,7 +26,16 @@ public class Parser {
     }
 
     private Expr expression() {
-        return equality();
+        return comma();
+    }
+
+    /**
+     * C comma operator. Lowest precedence of all operators.
+     *
+     * @return
+     */
+    private Expr comma() {
+        return leftAssociativeBinary(Parser::equality, COMMA);
     }
 
     private Expr equality() {
