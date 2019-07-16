@@ -30,7 +30,7 @@ public class Parser {
     }
 
     /**
-     * C comma operator. Lowest precedence of all operators.
+     * C-style comma operator. Lowest precedence of all operators.
      *
      * @return
      */
@@ -39,7 +39,10 @@ public class Parser {
     }
 
     /**
-     * C-style ternary conditional operator ?:
+     * C-style ternary conditional operator '?:'. Second lowest precedence, just above the comma operator.1
+     * <p>
+     * It is right associative thus implemented via right recursion, the middle operand is treated as parenthesized and
+     * thus can be any expression.
      *
      * @return
      */
@@ -50,7 +53,7 @@ public class Parser {
             Token query = previous();
             Expr middle = expression(); // In C, the middle operand of ?: is treated as parenthesized
             Token colon = consume(COLON, "Expect ':' after expression.");
-            Expr right = conditional(); // The right operand can be an expression of equal precedence
+            Expr right = conditional(); // Right associative
             expr = new Expr.Ternary(expr, query, middle, colon, right);
         }
 
