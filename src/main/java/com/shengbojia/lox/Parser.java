@@ -35,7 +35,26 @@ public class Parser {
      * @return
      */
     private Expr comma() {
-        return leftAssociativeBinary(Parser::equality, COMMA);
+        return leftAssociativeBinary(Parser::conditional, COMMA);
+    }
+
+    /**
+     * C-style ternary conditional operator ?:
+     *
+     * @return
+     */
+    private Expr conditional() {
+        Expr expr = equality();
+
+        if (match(QUERY)) {
+            Token query = previous();
+            Expr middle = expression(); // In C, the middle operand of ?: is treated as parenthesized
+            Token colon = consume(COLON, "Expect ':' after expression.");
+            Expr right = conditional(); // The right operand can be an expression of equal precedence
+            expr = new Expr.Ternary(expr, query, middle, colon, right);
+        }
+
+        return expr;
     }
 
     private Expr equality() {

@@ -109,6 +109,12 @@ public class Scanner {
             case '*':
                 addToken(STAR);
                 break;
+            case '?':
+                addToken(QUERY);
+                break;
+            case ':':
+                addToken(COLON);
+                break;
 
             case '!': // These characters could be part of a 2-char lexeme, so must check the second char.
                 addToken(secondCharIs('=') ? BANG_EQUAL : BANG);
