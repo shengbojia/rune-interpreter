@@ -1,5 +1,6 @@
 package com.shengbojia.lox;
 
+import com.shengbojia.lox.errors.ParseError;
 import com.shengbojia.lox.token.Token;
 import com.shengbojia.lox.token.TokenType;
 
@@ -293,8 +294,5 @@ public class Parser {
      */
     private Token previous() {
         return tokens.get(current - 1);
-    }
-
-    private static class ParseError extends RuntimeException {
     }
 }

@@ -36,6 +36,9 @@ abstract class Expr {
         final Expr right;
     }
 
+    /**
+     * C-style ternary operator '?:'. Also known as a conditional operator.
+     */
     static class Ternary extends Expr {
 
         Ternary(Expr left, Token firstOp, Expr middle, Token secondOp, Expr right) {

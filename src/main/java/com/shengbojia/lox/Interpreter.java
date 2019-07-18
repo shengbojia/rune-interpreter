@@ -1,8 +1,41 @@
 package com.shengbojia.lox;
 
+import com.shengbojia.lox.Expr;
+import com.shengbojia.lox.errors.RuntimeError;
+import com.shengbojia.lox.token.Token;
 import com.shengbojia.lox.token.TokenType;
 
 public class Interpreter implements Expr.Visitor<Object> {
+
+    void interpret(Expr expr) {
+        try {
+            Object value = evaluate(expr);
+            System.out.println(makeIntoString(value));
+        } catch (RuntimeError error) {
+            Lox.runtimeError(error);
+        }
+    }
+
+    private String makeIntoString(Object o) {
+
+        // Special cases for nil and Lox numbers
+        if (o == null) {
+            return "nil";
+        }
+
+        if (o instanceof Double) {
+            String text = o.toString();
+
+            // Make it into Lox-style integer double
+            if (text.endsWith(".0")) {
+                text = text.substring(0, text.length() - 2);
+            }
+            return text;
+        }
+
+        // Everything else is same in Lox as java
+        return o.toString();
+    }
 
     private Object evaluate(Expr expr) {
         return expr.accept(this);
@@ -29,6 +62,7 @@ public class Interpreter implements Expr.Visitor<Object> {
             case BANG:
                 return !isTruthy(right);
             case MINUS:
+                checkNumberOperand(expr.operator, right);
                 // Lox is dynamically typed, hence the casting which occurs at runtime
                 return -(double) right;
         }
@@ -64,27 +98,42 @@ public class Interpreter implements Expr.Visitor<Object> {
 
             // Arithmetic
             case STAR:
+                checkNumberOperands(expr.operator, left, right);
                 return (double) left * (double) right;
             case SLASH:
+                checkNumberOperands(expr.operator, left, right);
+                if ((double) right == 0) {
+                    throw new RuntimeError(expr.operator, "Cannot divide by zero.");
+                }
                 return (double) left / (double) right;
             case PLUS:
                 // Overloaded as string concatenation
                 if (left instanceof Double && right instanceof Double) {
                     return (double) left + (double) right;
-                } else if (left instanceof String && right instanceof String) {
-                    return (String) left + (String) right;
+                } else if (left instanceof String) {
+                    return (String) left + makeIntoString(right);
+                } else if (right instanceof String) {
+                    return makeIntoString(left
+                    ) + right;
+                } else {
+                    throw new RuntimeError(expr.operator, "Operands must both be numbers or one of them a string.");
                 }
             case MINUS:
+                checkNumberOperands(expr.operator, left, right);
                 return (double) left - (double) right;
 
             // Comparison
             case GREATER:
+                checkNumberOperands(expr.operator, left, right);
                 return (double) left > (double) right;
             case GREATER_EQUAL:
+                checkNumberOperands(expr.operator, left, right);
                 return (double) left >= (double) right;
             case LESS:
+                checkNumberOperands(expr.operator, left, right);
                 return (double) left < (double) right;
             case LESS_EQUAL:
+                checkNumberOperands(expr.operator, left, right);
                 return (double) left <= (double) right;
 
             // Equality
@@ -138,7 +187,7 @@ public class Interpreter implements Expr.Visitor<Object> {
         switch (expr.firstOp.type) {
             case QUERY:
                 if (expr.secondOp.type == TokenType.COLON) {
-                    // TODO: Dynamically typed so I probably (???) don't have to check middle vs right
+                    // TODO: Dynamically typed so I probably (???) don't have to check same type of middle vs right
                     // Which of the latter two operands gets evaluated is determined here
                     return isTruthy(left) ? evaluate(expr.middle) : evaluate(expr.right);
                 }
@@ -146,5 +195,19 @@ public class Interpreter implements Expr.Visitor<Object> {
 
         // Unreachable
         return null;
+    }
+
+    private void checkNumberOperand(Token operator, Object operand) {
+        if (operand instanceof Double) {
+            return;
+        }
+        throw new RuntimeError(operator, "Operand must be a number.");
+    }
+
+    private void checkNumberOperands(Token operator, Object left, Object right) {
+        if (left instanceof Double && right instanceof Double) {
+            return;
+        }
+        throw new RuntimeError(operator, "Operands must be numbers");
     }
 }
