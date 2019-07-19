@@ -12,21 +12,27 @@ import java.util.List;
 public class GenerateAstCode {
 
     public static void main(String[] args) throws IOException {
-        if (args.length != 3) {
-            System.err.println("Usage: generate_ast <base class name> <output directory> <package name>");
+        if (args.length != 2) {
+            System.err.println("Usage: generate_ast <output directory> <package name>");
             System.exit(1);
         }
 
-        String baseClassName = args[0];
-        String outputDir = args[1];
-        String packageName = args[2];
+        String outputDir = args[0];
+        String packageName = args[1];
 
-        defineAst(outputDir, packageName, baseClassName, Arrays.asList(
+        // Generate the file for expressions
+        defineAst(outputDir, packageName, "Expr", Arrays.asList(
                 "Binary   : Expr left, Token operator, Expr right",
                 "Ternary  : Expr left, Token firstOp, Expr middle, Token secondOp, Expr right",
                 "Grouping : Expr expression",
                 "Literal  : Object value",
                 "Unary    : Token operator, Expr right"
+        ));
+
+        // Generate the file for statements
+        defineAst(outputDir, packageName, "Stmt", Arrays.asList(
+                "Expression : Expr expression",
+                "Print      : Expr expression"
         ));
     }
 
