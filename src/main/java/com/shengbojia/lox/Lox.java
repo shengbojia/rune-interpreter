@@ -69,13 +69,14 @@ public class Lox {
 
         // For now, just print the expressions.
         Parser parser = new Parser(tokens);
-        Expr expression = parser.parse();
+        List<Stmt> statements = parser.parse();
 
+        // Stop if a syntax error occurs
         if (hadError) {
             return;
         }
 
-        interpreter.interpret(expression);
+        interpreter.interpret(statements);
 
         // Below is for testing the parser
         // System.out.println(new AstPrinter().print(expression));
@@ -104,6 +105,7 @@ public class Lox {
         } else {
             report(token.line, " at " + token.lexeme + "'", msg);
         }
+
     }
 
     static void runtimeError(RuntimeError error) {

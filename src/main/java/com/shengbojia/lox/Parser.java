@@ -4,6 +4,7 @@ import com.shengbojia.lox.errors.ParseError;
 import com.shengbojia.lox.token.Token;
 import com.shengbojia.lox.token.TokenType;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -17,12 +18,62 @@ public class Parser {
         this.tokens = tokens;
     }
 
-    Expr parse() {
+    List<Stmt> parse() {
+        List<Stmt> statements = new ArrayList<>();
+        while (!reachedEnd()) {
+            statements.add(declaration());
+        }
+
+        return statements;
+    }
+
+    private Stmt declaration() {
         try {
-            return expression();
+            if (match(VAR)) {
+                return varDeclaration();
+            }
+            return statement();
         } catch (ParseError error) {
+
+            // Synchronize at this level for error recovery
+            synchronize();
             return null;
         }
+    }
+
+    private Stmt statement() {
+        if (match(PRINT)) {
+            return printStatement();
+        }
+
+        return expressionStatement();
+    }
+
+    private Stmt varDeclaration() {
+        Token name = consume(IDENTIFIER, "Expect variable name.");
+
+        Expr initializer = null;
+
+        // Variable could be initialized
+        if (match(EQUAL)) {
+            initializer = expression();
+        }
+
+        consume(SEMICOLON, "Expect ';' after variable declaration.");
+        return new Stmt.Var(name, initializer);
+
+    }
+
+    private Stmt printStatement() {
+        Expr value = expression();
+        consume(SEMICOLON, "Expect ';'after value.");
+        return new Stmt.Print(value);
+    }
+
+    private Stmt expressionStatement() {
+        Expr expr = expression();
+        consume(SEMICOLON, "Expect ';' after expression");
+        return new Stmt.Expression(expr);
     }
 
     private Expr expression() {
@@ -124,6 +175,8 @@ public class Parser {
             return new Expr.Literal(null);
         } else if (match(NUMBER, STRING)) {
             return new Expr.Literal(previous().literal);
+        } else if (match(IDENTIFIER)) {
+            return new Expr.Variable(previous());
         } else if (match(LEFT_PAREN)) {
             Expr expr = expression();
             consume(RIGHT_PAREN, "Expect ')' after expression.");
