@@ -26,13 +26,15 @@ public class GenerateAstCode {
                 "Ternary  : Expr left, Token firstOp, Expr middle, Token secondOp, Expr right",
                 "Grouping : Expr expression",
                 "Literal  : Object value",
-                "Unary    : Token operator, Expr right"
+                "Unary    : Token operator, Expr right",
+                "Variable : Token name"
         ));
 
         // Generate the file for statements
         defineAst(outputDir, packageName, "Stmt", Arrays.asList(
                 "Expression : Expr expression",
-                "Print      : Expr expression"
+                "Print      : Expr expression",
+                "Var        : Token name, Expr initializer"
         ));
     }
 
