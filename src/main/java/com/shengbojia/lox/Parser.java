@@ -86,11 +86,29 @@ public class Parser {
      * @return
      */
     private Expr comma() {
-        return leftAssociativeBinary(Parser::conditional, COMMA);
+        return leftAssociativeBinary(Parser::assignment, COMMA);
+    }
+
+    private Expr assignment() {
+        Expr expr = conditional();
+
+        if (match(EQUAL)) {
+            Token equals = previous();
+            Expr value = assignment();
+
+            if (expr instanceof Expr.Variable) {
+                Token name = ((Expr.Variable) expr).name;
+                return new Expr.Assign(name, value);
+            }
+
+            error(equals, "Invalid assignment target.");
+        }
+
+        return expr;
     }
 
     /**
-     * C-style ternary conditional operator '?:'. Second lowest precedence, just above the comma operator.1
+     * C-style ternary conditional operator '?:'. Third lowest precedence, just above the assignment operator.
      * <p>
      * It is right associative thus implemented via right recursion, the middle operand is treated as parenthesized and
      * thus can be any expression.

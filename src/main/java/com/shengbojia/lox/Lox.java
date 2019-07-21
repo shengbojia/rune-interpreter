@@ -4,7 +4,6 @@ import com.shengbojia.lox.errors.RuntimeError;
 import com.shengbojia.lox.token.Token;
 import com.shengbojia.lox.token.TokenType;
 
-import javax.print.DocFlavor;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -132,6 +131,8 @@ public class Lox {
 
 }
 
+/*
+
 class AstPrinter implements Expr.Visitor<String> {
 
     String print(Expr expr) {
@@ -171,6 +172,8 @@ class AstPrinter implements Expr.Visitor<String> {
      * @param exprs the expressions to format
      * @return a Polish notation formatted expression
      */
+
+/*
     private String parenthesize(String name, Expr... exprs) {
         StringBuilder builder = new StringBuilder();
 
@@ -184,3 +187,7 @@ class AstPrinter implements Expr.Visitor<String> {
         return builder.toString();
     }
 }
+
+*/
+
+

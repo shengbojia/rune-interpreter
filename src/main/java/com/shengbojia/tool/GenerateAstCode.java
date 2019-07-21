@@ -22,6 +22,7 @@ public class GenerateAstCode {
 
         // Generate the file for expressions
         defineAst(outputDir, packageName, "Expr", Arrays.asList(
+                "Assign   : Token name, Expr value",
                 "Binary   : Expr left, Token operator, Expr right",
                 "Ternary  : Expr left, Token firstOp, Expr middle, Token secondOp, Expr right",
                 "Grouping : Expr expression",
