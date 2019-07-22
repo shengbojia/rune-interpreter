@@ -33,6 +33,7 @@ public class GenerateAstCode {
 
         // Generate the file for statements
         defineAst(outputDir, packageName, "Stmt", Arrays.asList(
+                "Block      : List<Stmt> statements",
                 "Expression : Expr expression",
                 "Print      : Expr expression",
                 "Var        : Token name, Expr initializer"
