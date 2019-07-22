@@ -41,14 +41,6 @@ public class Parser {
         }
     }
 
-    private Stmt statement() {
-        if (match(PRINT)) {
-            return printStatement();
-        }
-
-        return expressionStatement();
-    }
-
     private Stmt varDeclaration() {
         Token name = consume(IDENTIFIER, "Expect variable name.");
 
@@ -64,6 +56,16 @@ public class Parser {
 
     }
 
+    private Stmt statement() {
+        if (match(PRINT)) {
+            return printStatement();
+        } else if (match(LEFT_BRACE)) {
+            return new Stmt.Block(block());
+        }
+
+        return expressionStatement();
+    }
+
     private Stmt printStatement() {
         Expr value = expression();
         consume(SEMICOLON, "Expect ';'after value.");
@@ -74,6 +76,19 @@ public class Parser {
         Expr expr = expression();
         consume(SEMICOLON, "Expect ';' after expression");
         return new Stmt.Expression(expr);
+    }
+
+    private List<Stmt> block() {
+        List<Stmt> statements = new ArrayList<>();
+
+        // Keep parsing and adding to the list until '}' is reached or EOF occurs
+        while (!check(RIGHT_BRACE) && !reachedEnd()) {
+            statements.add(declaration());
+        }
+
+        // Make sure the block has a closing brace
+        consume(RIGHT_BRACE, "Expect '}' at the end of block.");
+        return statements;
     }
 
     private Expr expression() {

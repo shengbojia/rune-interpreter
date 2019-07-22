@@ -10,7 +10,17 @@ import java.util.Map;
  * A wrapper of a hash map which stores variables as identifier-value pairs.
  */
 public class Environment {
+
+    private Environment enclosing;
     private final Map<String, Object> values = new HashMap<>();
+
+    Environment() {
+        enclosing = null;
+    }
+
+    Environment(Environment enclosing) {
+        this.enclosing = enclosing;
+    }
 
     /**
      * Adds a identifier-value pair to the environment. Allows for redefining of a global variable.
@@ -34,12 +44,23 @@ public class Environment {
             return values.get(name.lexeme);
         }
 
+        // Check if variable is defined in the enclosing scope (if there is one)
+        if (enclosing != null) {
+            return enclosing.get(name);
+        }
+
         throw new RuntimeError(name, "Undefined variable '" + name.lexeme + "'.");
     }
 
     void assign(Token name, Object value) {
         if (values.containsKey(name.lexeme)) {
             values.put(name.lexeme, value);
+            return;
+        }
+
+        // Check if variable is defined in the enclosing scope (if there is one)
+        if (enclosing != null) {
+            enclosing.assign(name, value);
             return;
         }
 
