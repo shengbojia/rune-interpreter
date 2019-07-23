@@ -81,11 +81,12 @@ public class Parser {
      * statement  -> expressionStatement
      *             | ifStatement
      *             | printStatement
+     *             | whileStatement
      *             | block ;
      */
     private Stmt statement() {
         if (match(IF)) {
-            return ifStatment();
+            return ifStatement();
         }
         if (match(PRINT)) {
             return printStatement();
@@ -99,7 +100,7 @@ public class Parser {
     /**
      * ifStatement  -> "if" "(" expression ")" statement ( "else" statement )? ;
      */
-    private Stmt ifStatment() {
+    private Stmt ifStatement() {
         consume(LEFT_PAREN, "Expect '(' after 'if'.");
         Expr condition = expression();
         consume(RIGHT_PAREN, "Expect '(' after if condition.");
