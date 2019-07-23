@@ -10,6 +10,17 @@ import java.util.function.Function;
 
 import static com.shengbojia.lox.token.TokenType.*;
 
+/**
+ * Parser class that uses the following Context-Free Grammar:
+ * <p>
+ * ->   indicates production
+ * |    indicates a choice between a series of productions
+ * ()   is used for grouping
+ * *    a postfix for recursion, means preceding symbol/group maybe be repeated 0 or more times
+ * +    a postfix for recursion, similar to above but means at least 1 time.
+ * ?    postfix meaning preceding symbol/group appears 0 or 1 time.
+ * ;    not to be confused with the Lox statement end ';', this is a metalanguage symbol indicating end of current rule
+ */
 public class Parser {
     private final List<Token> tokens;
     private int current = 0;
@@ -18,6 +29,9 @@ public class Parser {
         this.tokens = tokens;
     }
 
+    /**
+     * program  -> declaration* EOF ;
+     */
     List<Stmt> parse() {
         List<Stmt> statements = new ArrayList<>();
         while (!reachedEnd()) {
@@ -27,6 +41,10 @@ public class Parser {
         return statements;
     }
 
+    /**
+     * declaration  -> varDeclaration
+     *               | statement ;
+     */
     private Stmt declaration() {
         try {
             if (match(VAR)) {
@@ -41,6 +59,9 @@ public class Parser {
         }
     }
 
+    /**
+     * varDeclaration  -> "var" IDENTIFIER ( "=" expression )? ";" ;
+     */
     private Stmt varDeclaration() {
         Token name = consume(IDENTIFIER, "Expect variable name.");
 
@@ -56,7 +77,16 @@ public class Parser {
 
     }
 
+    /**
+     * statement  -> expressionStatement
+     *             | ifStatement
+     *             | printStatement
+     *             | block ;
+     */
     private Stmt statement() {
+        if (match(IF)) {
+            return ifStatment();
+        }
         if (match(PRINT)) {
             return printStatement();
         } else if (match(LEFT_BRACE)) {
@@ -66,18 +96,46 @@ public class Parser {
         return expressionStatement();
     }
 
+    /**
+     * ifStatement  -> "if" "(" expression ")" statement ( "else" statement )? ;
+     */
+    private Stmt ifStatment() {
+        consume(LEFT_PAREN, "Expect '(' after 'if'.");
+        Expr condition = expression();
+        consume(RIGHT_PAREN, "Expect '(' after if condition.");
+
+        Stmt thenBranch = statement();
+        Stmt elseBranch = null;
+
+        // There may or may not be an else branch
+        if (match(ELSE)) {
+            elseBranch = statement();
+        }
+
+        return new Stmt.If(condition, thenBranch, elseBranch);
+    }
+
+    /**
+     * printStatement  -> "print" expression ";" ;
+     */
     private Stmt printStatement() {
         Expr value = expression();
         consume(SEMICOLON, "Expect ';'after value.");
         return new Stmt.Print(value);
     }
 
+    /**
+     * expressionStatement  -> expression ";" ;
+     */
     private Stmt expressionStatement() {
         Expr expr = expression();
         consume(SEMICOLON, "Expect ';' after expression");
         return new Stmt.Expression(expr);
     }
 
+    /**
+     * block  -> "{" declaration* "}" ;
+     */
     private List<Stmt> block() {
         List<Stmt> statements = new ArrayList<>();
 
@@ -91,6 +149,9 @@ public class Parser {
         return statements;
     }
 
+    /**
+     * expression  -> comma ;
+     */
     private Expr expression() {
         return comma();
     }
@@ -98,12 +159,16 @@ public class Parser {
     /**
      * C-style comma operator. Lowest precedence of all operators.
      *
-     * @return
+     * comma  -> assignment ","
      */
     private Expr comma() {
         return leftAssociativeBinary(Parser::assignment, COMMA);
     }
 
+    /**
+     * assignment  -> IDENTIFIER "=" assignment
+     *              | conditional ;
+     */
     private Expr assignment() {
         Expr expr = conditional();
 
@@ -127,8 +192,8 @@ public class Parser {
      * <p>
      * It is right associative thus implemented via right recursion, the middle operand is treated as parenthesized and
      * thus can be any expression.
-     *
-     * @return
+     * <p>
+     * conditional  -> equality "?" expression ":" conditional ;
      */
     private Expr conditional() {
         Expr expr = equality();
@@ -144,18 +209,39 @@ public class Parser {
         return expr;
     }
 
+    /**
+     * Short circuit logical or, but the short circuit semantics will be dealt with in the interpreter.
+     * <p>
+     * logicalOr  -> logicalAnd ( "or" logicalAnd )* ;
+     */
+    private Expr logicalOr() {
+        return new Expr.Literal(true);
+    }
+
+    /**
+     * equality  -> comparison ( ( "!=" | "==" ) comparison )* ;
+     */
     private Expr equality() {
         return leftAssociativeBinary(Parser::comparison, BANG_EQUAL, EQUAL_EQUAL);
     }
 
+    /**
+     * comparison  -> addition ( ( ">" | ">=" | "<" | "<=" ) addition )* ;
+     */
     private Expr comparison() {
         return leftAssociativeBinary(Parser::addition, GREATER, GREATER_EQUAL, LESS, LESS_EQUAL);
     }
 
+    /**
+     * addition  -> multiplication ( ( "-" | "+" ) multiplication )* ;
+     */
     private Expr addition() {
         return leftAssociativeBinary(Parser::multiplication, MINUS, PLUS);
     }
 
+    /**
+     * multiplication  -> unary ( ( "/" | "*" ) unary )* ;
+     */
     private Expr multiplication() {
         return leftAssociativeBinary(Parser::unary, STAR, SLASH);
     }
@@ -183,8 +269,9 @@ public class Parser {
     /**
      * Determines based on the current token whether or not there is a unary expression (!, or -). Then, recursively
      * parses until the end of the unary expression.
-     *
-     * @return the parsed expression
+     * <p>
+     * unary  -> ( "!" | "-" ) unary
+     *         | primary ;
      */
     private Expr unary() {
         if (match(BANG, MINUS)) {
@@ -199,6 +286,15 @@ public class Parser {
         return primary();
     }
 
+
+    /**
+     * primary  -> NUMBER
+     *           | STRING
+     *           | "false"
+     *           | "true"
+     *           | "nil"
+     *           | "(" expression ")" ;
+     */
     private Expr primary() {
         if (match(FALSE)) {
             return new Expr.Literal(false);
