@@ -1,0 +1,12 @@
+var x = 0;
+var y = 1;
+
+true ? x = 2 : (y = 3);
+
+print x; // expect: 2
+print y; // expect: 1 (should not have side effect)
+
+false ? x = -1 : (y = -2);
+
+print x; // expect: 2
+print y; // expect: -2
