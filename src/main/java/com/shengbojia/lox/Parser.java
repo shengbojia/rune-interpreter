@@ -5,6 +5,7 @@ import com.shengbojia.lox.token.Token;
 import com.shengbojia.lox.token.TokenType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
@@ -79,13 +80,16 @@ public class Parser {
 
     /**
      * statement  -> expressionStatement
+     *             | forStatement
      *             | ifStatement
      *             | printStatement
      *             | whileStatement
      *             | block ;
      */
     private Stmt statement() {
-        if (match(IF)) {
+        if (match(FOR)) {
+            return forStatement();
+        } else if (match(IF)) {
             return ifStatement();
         } else if (match(PRINT)) {
             return printStatement();
@@ -96,6 +100,68 @@ public class Parser {
         }
 
         return expressionStatement();
+    }
+
+    /**
+     * Instead of having a dedicated for loop syntax tree node, we will desugar it.
+     * eg) for(var i = 0; i < 2; i++) {} becomes:
+     * var i = 0; while(i < 2) {i++;}
+     * <p>
+     * forStatement  -> "for" "(" (varDeclaration | expressionStatement | ";")
+     *                            expression? ";"
+     *                            expression? ")" statement ;
+     */
+    private Stmt forStatement() {
+        consume(LEFT_PAREN, "Expect '(' after 'for'.");
+
+        Stmt initializer;
+        if (match(SEMICOLON)) {
+            initializer = null;
+        } else if (match(VAR)) {
+            initializer = varDeclaration();
+        } else {
+            initializer = expressionStatement();
+        }
+
+        Expr condition = null;
+        if (!check(SEMICOLON)) {
+            condition = expression();
+        }
+        consume(SEMICOLON, "Expect ';' after for loop condition");
+
+        Expr increment = null;
+        if (!check(RIGHT_PAREN)) {
+            increment = expression();
+        }
+        consume(RIGHT_PAREN, "Expect ')' after for clauses.");
+
+        Stmt body = statement();
+
+        // Place the increment stmt after the body in a new block
+        if (increment != null) {
+            body = new Stmt.Block(Arrays.asList(
+                    body,
+                    new Stmt.Expression(increment)
+            ));
+        }
+
+        // for(... ; ; ...) becomes while(true)
+        if (condition == null) {
+            condition = new Expr.Literal(true);
+        }
+
+        // Essentially a while loop now
+        body = new Stmt.While(condition, body);
+
+        // Place initializer before body in a new block
+        if (initializer != null) {
+            body = new Stmt.Block(Arrays.asList(
+                    initializer,
+                    body
+            ));
+        }
+
+        return body;
     }
 
     /**
