@@ -5,6 +5,7 @@ import com.shengbojia.lox.errors.RuntimeError;
 import com.shengbojia.lox.token.Token;
 import com.shengbojia.lox.token.TokenType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
@@ -308,6 +309,33 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
         // Unreachable
         return null;
+    }
+
+    @Override
+    public Object visitCallExpr(Expr.Call expr) {
+        // First evaluate callee
+        Object callee = evaluate(expr.callee);
+
+        // Then evaluate the arguments in order of appearance
+        List<Object> arguments = new ArrayList<>();
+        for (Expr argument : expr.arguments) {
+            arguments.add(evaluate(argument));
+        }
+
+        // Make sure what we are calling is actually callable
+        if (!(callee instanceof LoxCallable)) {
+            throw new RuntimeError(expr.paren,
+                    "Can only call functions and classes.");
+        }
+        LoxCallable function = (LoxCallable) callee;
+
+        if (arguments.size() != function.arity()) {
+            throw new RuntimeError(expr.paren, "Expected " + function.arity() +
+                    " arguments but got " + arguments.size() + ".");
+        }
+
+
+        return function.call(this, arguments);
     }
 
     private void checkNumberOperand(Token operator, Object operand) {

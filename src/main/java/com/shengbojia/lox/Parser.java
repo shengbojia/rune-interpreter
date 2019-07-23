@@ -373,9 +373,41 @@ public class Parser {
         // Make sure a binary operator does not appear at the start of an expression.
         checkBinaryNoLeftError();
 
-        return primary();
+        return call();
     }
 
+    private Expr call() {
+        Expr expr = primary();
+
+        while (true) {
+            if (match(LEFT_PAREN)) {
+                expr = finishCall(expr);
+            } else {
+                break;
+            }
+        }
+
+        return expr;
+    }
+
+    private Expr finishCall(Expr callee) {
+        List<Expr> arguments = new ArrayList<>();
+
+        if (!check(RIGHT_PAREN)) {
+            do {
+
+                // java has a max argument size of 255, let's have 32 on Lox
+                if (arguments.size() >= 32) {
+                    error(peek(), "Cannot have more than 32 arguments.");
+                }
+                arguments.add(expression());
+            } while (match(COMMA));
+        }
+
+        Token paren = consume(RIGHT_PAREN, "Expect ')' after arguments.");
+
+        return new Expr.Call(callee, paren, arguments);
+    }
 
     /**
      * primary  -> NUMBER

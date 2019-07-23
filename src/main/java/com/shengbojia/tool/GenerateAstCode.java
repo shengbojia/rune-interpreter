@@ -24,6 +24,7 @@ public class GenerateAstCode {
         defineAst(outputDir, packageName, "Expr", Arrays.asList(
                 "Assign   : Token name, Expr value",
                 "Binary   : Expr left, Token operator, Expr right",
+                "Call     : Expr callee, Token paren, List<Expr> arguments",
                 "Ternary  : Expr left, Token firstOp, Expr middle, Token secondOp, Expr right",
                 "Grouping : Expr expression",
                 "Literal  : Object value",
