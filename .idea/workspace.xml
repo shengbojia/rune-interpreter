@@ -31,8 +31,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="83" column="20" selection-start-line="83" selection-start-column="20" selection-end-line="83" selection-end-column="20" />
+            <state relative-caret-position="318">
+              <caret line="142" column="20" selection-start-line="142" selection-start-column="20" selection-end-line="142" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#431#432#0" expanded="true" />
@@ -89,8 +89,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/shengbojia/tool/GenerateAstCode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="67">
-              <caret line="29" column="67" selection-start-line="29" selection-start-column="67" selection-end-line="29" selection-end-column="67" />
+            <state relative-caret-position="142">
+              <caret line="41" column="55" selection-start-line="41" selection-start-column="55" selection-end-line="41" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -153,10 +153,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Lox.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Environment.java" />
         <option value="$PROJECT_DIR$/src/main/res/LoxFiles/block/nested.lox" />
-        <option value="$PROJECT_DIR$/src/main/java/com/shengbojia/tool/GenerateAstCode.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Interpreter.java" />
         <option value="$PROJECT_DIR$/src/main/res/LoxFiles/condtional/side_effect.lox" />
         <option value="$PROJECT_DIR$/src/main/res/LoxFiles/conditional/side_effect.lox" />
+        <option value="$PROJECT_DIR$/src/main/java/com/shengbojia/tool/GenerateAstCode.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Parser.java" />
       </list>
     </option>
@@ -368,7 +368,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.GenerateAstCode">
+  <component name="RunManager" selected="Application.Lox">
     <configuration name="GenerateAstCode" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.shengbojia.tool.GenerateAstCode" />
       <module name="LoxInterpreter" />
@@ -386,7 +386,7 @@
     <configuration name="Lox" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.shengbojia.lox.Lox" />
       <module name="LoxInterpreter" />
-      <option name="PROGRAM_PARAMETERS" value="C:\Users\Frost\IdeaProjects\SideProjects\LoxInterpreter\src\main\res\LoxFiles\conditional\side_effect.lox" />
+      <option name="PROGRAM_PARAMETERS" value="C:\Users\Frost\IdeaProjects\SideProjects\LoxInterpreter\src\main\res\LoxFiles\while\syntax.lox" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.shengbojia.lox.*" />
@@ -403,8 +403,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GenerateAstCode" />
         <item itemvalue="Application.Lox" />
+        <item itemvalue="Application.GenerateAstCode" />
       </list>
     </recent_temporary>
   </component>
@@ -420,12 +420,12 @@
       <workItem from="1562814785734" duration="599000" />
       <workItem from="1562885727247" duration="6778000" />
       <workItem from="1563074795606" duration="39849000" />
-      <workItem from="1563773310175" duration="8322000" />
+      <workItem from="1563773310175" duration="8568000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72342000" />
+    <option name="totallyTimeSpent" value="72588000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -637,16 +637,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/shengbojia/tool/GenerateAstCode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="67">
-          <caret line="29" column="67" selection-start-line="29" selection-start-column="67" selection-end-line="29" selection-end-column="67" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/LoxFiles/bool/not.lox">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -670,6 +660,16 @@
     <entry file="file://$PROJECT_DIR$/src/main/res/LoxFiles/bool/equality.lox">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/shengbojia/tool/GenerateAstCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="41" column="55" selection-start-line="41" selection-start-column="55" selection-end-line="41" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Interpreter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="454">
@@ -683,8 +683,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="83" column="20" selection-start-line="83" selection-start-column="20" selection-end-line="83" selection-end-column="20" />
+        <state relative-caret-position="318">
+          <caret line="142" column="20" selection-start-line="142" selection-start-column="20" selection-end-line="142" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#431#432#0" expanded="true" />
