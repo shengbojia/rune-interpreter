@@ -1,4 +1,6 @@
-package com.shengbojia.lox;
+package com.shengbojia.lox.callables;
+
+import com.shengbojia.lox.Interpreter;
 
 import java.util.List;
 

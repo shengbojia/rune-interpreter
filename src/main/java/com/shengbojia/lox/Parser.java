@@ -1,5 +1,7 @@
 package com.shengbojia.lox;
 
+import com.shengbojia.lox.ast.Expr;
+import com.shengbojia.lox.ast.Stmt;
 import com.shengbojia.lox.errors.ParseError;
 import com.shengbojia.lox.token.Token;
 import com.shengbojia.lox.token.TokenType;
@@ -43,12 +45,15 @@ public class Parser {
     }
 
     /**
-     * declaration  -> varDeclaration
+     * declaration  -> funDeclaration
+     *               | varDeclaration
      *               | statement ;
      */
     private Stmt declaration() {
         try {
-            if (match(VAR)) {
+            if (match(FUN)) {
+                return function("function");
+            } else if (match(VAR)) {
                 return varDeclaration();
             }
             return statement();
@@ -58,6 +63,27 @@ public class Parser {
             synchronize();
             return null;
         }
+    }
+
+    private Stmt.Function function(String kind) {
+        Token name = consume(IDENTIFIER, "Expect " + kind + " name.");
+
+        consume(LEFT_PAREN, "Expect '(' after " + kind + " name.");
+        List<Token> params = new ArrayList<>();
+        if (!check(RIGHT_PAREN)) {
+            do {
+                if (params.size() >= 32) {
+                    error(peek(), "Cannot have more than 32 parameters.");
+                }
+                params.add(consume(IDENTIFIER, "Expect parameter name."));
+            } while (match(COMMA));
+        }
+        consume(RIGHT_PAREN, "Expect ')' after parameters.");
+
+        consume(LEFT_BRACE, "Expect '{' before " + kind + " body.");
+        List<Stmt> body = block();
+
+        return new Stmt.Function(name, params, body);
     }
 
     /**

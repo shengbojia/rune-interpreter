@@ -1,6 +1,8 @@
 package com.shengbojia.lox;
 
-import com.shengbojia.lox.Expr;
+import com.shengbojia.lox.ast.Expr;
+import com.shengbojia.lox.ast.Stmt;
+import com.shengbojia.lox.callables.LoxCallable;
 import com.shengbojia.lox.errors.RuntimeError;
 import com.shengbojia.lox.token.Token;
 import com.shengbojia.lox.token.TokenType;
@@ -152,6 +154,11 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
         environment.assign(expr.name, value);
         return value;
+    }
+
+    @Override
+    public Void visitFunctionStmt(Stmt.Function stmt) {
+        return null;
     }
 
     @Override

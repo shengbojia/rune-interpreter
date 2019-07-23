@@ -1,5 +1,6 @@
 package com.shengbojia.lox;
 
+import com.shengbojia.lox.ast.Stmt;
 import com.shengbojia.lox.errors.RuntimeError;
 import com.shengbojia.lox.token.Token;
 import com.shengbojia.lox.token.TokenType;
