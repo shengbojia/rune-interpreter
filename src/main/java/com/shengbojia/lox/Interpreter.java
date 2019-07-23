@@ -3,6 +3,7 @@ package com.shengbojia.lox;
 import com.shengbojia.lox.ast.Expr;
 import com.shengbojia.lox.ast.Stmt;
 import com.shengbojia.lox.callables.LoxCallable;
+import com.shengbojia.lox.callables.LoxFunction;
 import com.shengbojia.lox.errors.RuntimeError;
 import com.shengbojia.lox.token.Token;
 import com.shengbojia.lox.token.TokenType;
@@ -13,7 +14,7 @@ import java.util.List;
 public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
     // fixed reference to the outermost global scope
-    final Environment globals = new Environment();
+    public final Environment globals = new Environment();
 
     // dynamic reference to the current scope
     private Environment environment = globals;
@@ -78,7 +79,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
         stmt.accept(this);
     }
 
-    private void executeBlock(List<Stmt> statements, Environment environment) {
+    public void executeBlock(List<Stmt> statements, Environment environment) {
 
         // The environment right as this method is being called
         Environment previous = this.environment;
@@ -98,6 +99,14 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
     @Override
     public Void visitExpressionStmt(Stmt.Expression stmt) {
         evaluate(stmt.expression);
+        return null;
+    }
+
+    @Override
+    public Void visitFunctionStmt(Stmt.Function stmt) {
+        LoxFunction function = new LoxFunction(stmt);
+
+        environment.define(stmt.name.lexeme, function);
         return null;
     }
 
@@ -154,11 +163,6 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
         environment.assign(expr.name, value);
         return value;
-    }
-
-    @Override
-    public Void visitFunctionStmt(Stmt.Function stmt) {
-        return null;
     }
 
     @Override
@@ -365,7 +369,6 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
             throw new RuntimeError(expr.paren, "Expected " + function.arity() +
                     " arguments but got " + arguments.size() + ".");
         }
-
 
         return function.call(this, arguments);
     }

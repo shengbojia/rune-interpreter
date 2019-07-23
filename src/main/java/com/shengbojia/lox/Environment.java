@@ -14,11 +14,11 @@ public class Environment {
     private Environment enclosing;
     private final Map<String, Object> values = new HashMap<>();
 
-    Environment() {
+    public Environment() {
         enclosing = null;
     }
 
-    Environment(Environment enclosing) {
+    public Environment(Environment enclosing) {
         this.enclosing = enclosing;
     }
 
@@ -28,7 +28,7 @@ public class Environment {
      * @param name  the name of the variable
      * @param value the value of the variable
      */
-    void define(String name, Object value) {
+    public void define(String name, Object value) {
         values.put(name, value);
     }
 
@@ -39,7 +39,7 @@ public class Environment {
      * @param name the identifier token of the desired variable
      * @return the value of the referenced variable
      */
-    Object get(Token name) {
+    public Object get(Token name) {
         if (values.containsKey(name.lexeme)) {
             return values.get(name.lexeme);
         }
@@ -52,7 +52,7 @@ public class Environment {
         throw new RuntimeError(name, "Undefined variable '" + name.lexeme + "'.");
     }
 
-    void assign(Token name, Object value) {
+    public void assign(Token name, Object value) {
         if (values.containsKey(name.lexeme)) {
             values.put(name.lexeme, value);
             return;

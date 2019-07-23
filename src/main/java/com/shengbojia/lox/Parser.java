@@ -65,6 +65,13 @@ public class Parser {
         }
     }
 
+    /**
+     * funDeclaration  -> "fun" function ;
+     * function        -> IDENTIFIER "(" parameters? ")" block ;
+     * parameters      -> IDENTIFIER ( "," IDENTIFIER )* ;
+     *
+     * @param kind could be function or method
+     */
     private Stmt.Function function(String kind) {
         Token name = consume(IDENTIFIER, "Expect " + kind + " name.");
 
@@ -386,7 +393,7 @@ public class Parser {
      * Determines based on the current token whether or not there is a unary expression (!, or -). Then, recursively
      * parses until the end of the unary expression.
      * <p>
-     * unary  -> ( "!" | "-" ) unary
+     * unary  -> ( "!" | "-" ) unary | call ;
      *         | primary ;
      */
     private Expr unary() {
@@ -402,6 +409,9 @@ public class Parser {
         return call();
     }
 
+    /**
+     * call  -> primary ( "(" arguments? ")" )* ;
+     */
     private Expr call() {
         Expr expr = primary();
 
@@ -416,12 +426,18 @@ public class Parser {
         return expr;
     }
 
+    /**
+     * Helper method to parse argument list.
+     * <p>
+     * arguments  -> expression ( "," expression )* ;
+     *
+     * @param callee the callee
+     */
     private Expr finishCall(Expr callee) {
         List<Expr> arguments = new ArrayList<>();
 
         if (!check(RIGHT_PAREN)) {
             do {
-
                 // java has a max argument size of 255, let's have 32 on Lox
                 if (arguments.size() >= 32) {
                     error(peek(), "Cannot have more than 32 arguments.");
