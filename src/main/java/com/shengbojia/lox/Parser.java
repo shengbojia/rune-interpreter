@@ -193,10 +193,10 @@ public class Parser {
      * It is right associative thus implemented via right recursion, the middle operand is treated as parenthesized and
      * thus can be any expression.
      * <p>
-     * conditional  -> equality "?" expression ":" conditional ;
+     * conditional  -> logicalOr "?" expression ":" conditional ;
      */
     private Expr conditional() {
-        Expr expr = equality();
+        Expr expr = logicalOr();
 
         if (match(QUERY)) {
             Token query = previous();
@@ -210,12 +210,21 @@ public class Parser {
     }
 
     /**
-     * Short circuit logical or, but the short circuit semantics will be dealt with in the interpreter.
+     * Short circuit logical or.
      * <p>
      * logicalOr  -> logicalAnd ( "or" logicalAnd )* ;
      */
     private Expr logicalOr() {
-        return new Expr.Literal(true);
+        return leftAssociativeBinary(Parser::logicalAnd, OR);
+    }
+
+    /**
+     * Short circuit logical and.
+     * <p>
+     * logicalAnd  -> equality ( "and" equality )* ;
+     */
+    private Expr logicalAnd() {
+        return leftAssociativeBinary(Parser::equality, AND);
     }
 
     /**

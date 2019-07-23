@@ -125,6 +125,27 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
     }
 
     @Override
+    public Object visitLogicalExpr(Expr.Logical expr) {
+        Object left = evaluate(expr.left);
+
+        if (expr.operator.type == TokenType.OR) {
+
+            // short circuit or
+            if (isTruthy(left)) {
+                return left;
+            }
+        } else {
+            // short circuit and
+            if (!isTruthy(left)) {
+                return left;
+            }
+        }
+
+        // returns right because that's how short circuit works
+        return evaluate(expr.right);
+    }
+
+    @Override
     public Object visitGroupingExpr(Expr.Grouping expr) {
         // Simply evaluate the subexpression within the grouping
         return evaluate(expr.expression);
