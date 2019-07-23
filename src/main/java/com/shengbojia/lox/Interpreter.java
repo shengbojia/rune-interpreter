@@ -9,8 +9,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
-    // The variables in the environment stay in memory so long as the interpreter is running
-    private Environment environment = new Environment();
+
+    // fixed reference to the outermost global scope
+    final Environment globals = new Environment();
+
+    // dynamic reference to the current scope
+    private Environment environment = globals;
+
+    Interpreter() {
+        // Native function clock()
+        globals.define("clock", new LoxCallable() {
+            @Override
+            public int arity() {
+                return 0;
+            }
+
+            @Override
+            public Object call(Interpreter interpreter, List<Object> arguments) {
+                // Returns current system time, in seconds
+                return (double) System.currentTimeMillis() / 1000.0;
+            }
+
+            @Override
+            public String toString() {
+                return "<native func>";
+            }
+        });
+    }
 
     void interpret(List<Stmt> statements) {
         try {
