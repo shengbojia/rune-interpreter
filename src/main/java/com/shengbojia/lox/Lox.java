@@ -56,8 +56,9 @@ public class Lox {
         InputStreamReader input = new InputStreamReader(System.in);
         BufferedReader reader = new BufferedReader(input);
 
+        System.out.println("Entered REPL mode:");
         for (; ; ) {
-            System.out.print("> ");
+            System.out.print("jlox>> ");
             run(reader.readLine());
 
         }
