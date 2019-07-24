@@ -3,6 +3,7 @@ package com.shengbojia.lox.callables;
 import com.shengbojia.lox.Environment;
 import com.shengbojia.lox.Interpreter;
 import com.shengbojia.lox.ast.Stmt;
+import com.shengbojia.lox.throwables.Return;
 
 import java.util.List;
 
@@ -27,7 +28,14 @@ public class LoxFunction implements LoxCallable {
             environment.define(declaration.params.get(i).lexeme, arguments.get(i));
         }
 
-        interpreter.executeBlock(declaration.body, environment);
+        // Catch possible return value and returns it
+        try {
+            interpreter.executeBlock(declaration.body, environment);
+        } catch (Return returnValue) {
+            return returnValue.value;
+        }
+
+        // If no explicit return value in fun call, return nil
         return null;
     }
 

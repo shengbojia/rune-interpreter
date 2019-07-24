@@ -4,7 +4,8 @@ import com.shengbojia.lox.ast.Expr;
 import com.shengbojia.lox.ast.Stmt;
 import com.shengbojia.lox.callables.LoxCallable;
 import com.shengbojia.lox.callables.LoxFunction;
-import com.shengbojia.lox.errors.RuntimeError;
+import com.shengbojia.lox.throwables.Return;
+import com.shengbojia.lox.throwables.RuntimeError;
 import com.shengbojia.lox.token.Token;
 import com.shengbojia.lox.token.TokenType;
 
@@ -129,8 +130,18 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
     }
 
     @Override
+    public Void visitReturnStmt(Stmt.Return stmt) {
+        Object value = null;
+        if (stmt.value != null) {
+            value = evaluate(stmt.value);
+        }
+
+        throw new Return(value);
+    }
+
+    @Override
     public Void visitWhileStmt(Stmt.While stmt) {
-        while (isTruthy(stmt.condition)) {
+        while (isTruthy(evaluate(stmt.condition))) {
             execute(stmt.body);
         }
 

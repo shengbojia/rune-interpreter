@@ -2,7 +2,7 @@ package com.shengbojia.lox;
 
 import com.shengbojia.lox.ast.Expr;
 import com.shengbojia.lox.ast.Stmt;
-import com.shengbojia.lox.errors.ParseError;
+import com.shengbojia.lox.throwables.ParseError;
 import com.shengbojia.lox.token.Token;
 import com.shengbojia.lox.token.TokenType;
 
@@ -127,6 +127,8 @@ public class Parser {
             return ifStatement();
         } else if (match(PRINT)) {
             return printStatement();
+        } else if (match(RETURN)) {
+            return returnStatement();
         } else if (match(WHILE)) {
             return whileStatement();
         } else if (match(LEFT_BRACE)) {
@@ -229,7 +231,19 @@ public class Parser {
     /**
      * returnStatement  -> "return" expression? ";" ;
      */
+    private Stmt returnStatement() {
+        Token keyword = previous();
 
+        // Default return is nil (null)
+        Expr value = null;
+
+        if (!check(SEMICOLON)) {
+            value = expression();
+        }
+
+        consume(SEMICOLON, "Expect ';' after return value");
+        return new Stmt.Return(keyword, value);
+    }
 
     /**
      * expressionStatement  -> expression ";" ;
@@ -547,7 +561,7 @@ public class Parser {
 
     /**
      * Advances through the tokens and discards them until a new statement is reached. By discarding the within the
-     * statement containing the error, prevents cascading errors from occurring.
+     * statement containing the error, prevents cascading throwables from occurring.
      */
     private void synchronize() {
         advance();

@@ -1,6 +1,6 @@
 package com.shengbojia.lox;
 
-import com.shengbojia.lox.errors.RuntimeError;
+import com.shengbojia.lox.throwables.RuntimeError;
 import com.shengbojia.lox.token.Token;
 
 import java.util.HashMap;

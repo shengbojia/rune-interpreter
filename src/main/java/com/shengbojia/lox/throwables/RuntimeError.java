@@ -1,4 +1,4 @@
-package com.shengbojia.lox.errors;
+package com.shengbojia.lox.throwables;
 
 import com.shengbojia.lox.token.Token;
 
