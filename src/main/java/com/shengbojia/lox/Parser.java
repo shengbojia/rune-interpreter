@@ -330,7 +330,7 @@ public class Parser {
      * conditional  -> logicalOr "?" expression ":" conditional ;
      */
     private Expr conditional() {
-        Expr expr = logicalOr();
+        Expr expr = lambda();
 
         if (match(QUERY)) {
             Token query = previous();
@@ -341,6 +341,37 @@ public class Parser {
         }
 
         return expr;
+    }
+
+    /**
+     * lambda      -> "lambda" "(" parameters? ")" block ;
+     * parameters  -> IDENTIFIER ( "," IDENTIFIER )* ;
+     *
+     */
+    private Expr lambda() {
+        if (match(LAMBDA)) {
+
+            consume(LEFT_PAREN, "Expect '(' after 'lambda'.");
+            List<Token> params = new ArrayList<>();
+            if (!check(RIGHT_PAREN)) {
+                do {
+                    if (params.size() >= 32) {
+                        error(peek(), "Cannot have more than 32 parameters in lambda.");
+                    }
+                    params.add(consume(IDENTIFIER, "Expect parameter name."));
+                } while (match(COMMA));
+            }
+
+            consume(RIGHT_PAREN, "Expect ')' after lambda parameters.");
+
+            consume(LEFT_BRACE, "Expect '{' before lambda body.");
+            List<Stmt> body = block();
+
+            return new Expr.Lambda(params, body);
+        }
+
+
+        return logicalOr();
     }
 
     /**

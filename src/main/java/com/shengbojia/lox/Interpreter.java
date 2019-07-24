@@ -4,6 +4,7 @@ import com.shengbojia.lox.ast.Expr;
 import com.shengbojia.lox.ast.Stmt;
 import com.shengbojia.lox.callables.LoxCallable;
 import com.shengbojia.lox.callables.LoxFunction;
+import com.shengbojia.lox.callables.LoxLambda;
 import com.shengbojia.lox.throwables.Return;
 import com.shengbojia.lox.throwables.RuntimeError;
 import com.shengbojia.lox.token.Token;
@@ -106,7 +107,6 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
     @Override
     public Void visitFunctionStmt(Stmt.Function stmt) {
         LoxFunction function = new LoxFunction(stmt, environment);
-
         environment.define(stmt.name.lexeme, function);
         return null;
     }
@@ -225,6 +225,11 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
         // Should be unreachable code
         return null;
+    }
+
+    @Override
+    public Object visitLambdaExpr(Expr.Lambda expr) {
+        return new LoxLambda(expr);
     }
 
     @Override

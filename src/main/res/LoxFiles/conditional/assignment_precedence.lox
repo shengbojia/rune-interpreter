@@ -1,0 +1,6 @@
+var x;
+var y;
+
+true ? x : y = 1; // expect Invalid assignemnt target error
+
+print x;

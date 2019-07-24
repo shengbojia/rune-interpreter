@@ -1,0 +1,12 @@
+var x = "x1";
+var y = "y1";
+
+x = y = "y2", "x2"; // should be (x = (y = "y2")), "x2"
+
+print x; // y2
+print y; // y2
+
+x = (y = "y3", "x3");
+
+print x; // x3
+print y; // y3

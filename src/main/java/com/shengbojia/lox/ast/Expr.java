@@ -24,6 +24,8 @@ public abstract class Expr {
 
         R visitUnaryExpr(Unary expr);
 
+        R visitLambdaExpr(Lambda expr);
+
         R visitVariableExpr(Variable expr);
     }
 
@@ -153,6 +155,21 @@ public abstract class Expr {
 
         public final Token operator;
         public final Expr right;
+    }
+
+    public static class Lambda extends Expr {
+
+        public Lambda(List<Token> params, List<Stmt> body) {
+            this.params = params;
+            this.body = body;
+        }
+
+        public <R> R accept(Visitor<R> visitor) {
+            return visitor.visitLambdaExpr(this);
+        }
+
+        public final List<Token> params;
+        public final List<Stmt> body;
     }
 
     public static class Variable extends Expr {
