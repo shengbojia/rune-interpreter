@@ -116,6 +116,7 @@ public class Parser {
      *             | forStatement
      *             | ifStatement
      *             | printStatement
+     *             | returnStatement
      *             | whileStatement
      *             | block ;
      */
@@ -224,6 +225,11 @@ public class Parser {
         consume(SEMICOLON, "Expect ';'after value.");
         return new Stmt.Print(value);
     }
+
+    /**
+     * returnStatement  -> "return" expression? ";" ;
+     */
+
 
     /**
      * expressionStatement  -> expression ";" ;
