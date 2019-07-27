@@ -42,6 +42,7 @@ public class GenerateAstCode {
                 "If         : Expr condition, Stmt thenBranch, Stmt elseBranch",
                 "Print      : Expr expression",
                 "Return     : Token keyword, Expr value",
+                "Break      : Token keyword",
                 "Var        : Token name, Expr initializer",
                 "While      : Expr condition, Stmt body"
         ));
