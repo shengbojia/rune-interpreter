@@ -13,6 +13,9 @@ import com.shengbojia.lox.token.TokenType;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that deals with the semantics of interpreting an abstract syntax tree.
+ */
 public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
     // fixed reference to the outermost global scope
@@ -72,6 +75,8 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
         // Everything else is same in Lox as java
         return o.toString();
     }
+
+    void resolve(Expr expr, int filler) {}
 
     private Object evaluate(Expr expr) {
         return expr.accept(this);

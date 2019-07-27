@@ -11,7 +11,7 @@ import java.util.Map;
 import static com.shengbojia.lox.token.TokenType.*;
 
 /**
- * Scanner for the interpreter.
+ * Scanner that consumes a .lox file in string format, and turns the content into a sequence of tokens.
  */
 public class Scanner {
     private final String source;
