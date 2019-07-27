@@ -1,0 +1,20 @@
+var i = 0;
+while (i < 3) {
+    for (var j = i; j < 3; j = j + 1) {
+        if (j == 2) {
+            break;
+        }
+        print("j = " + j);
+    }
+    print("i = " + i);
+    i = i + 1;
+}
+
+/* Expect: Only break out of for loop, still execute rest of while loop
+j = 0
+j = 1
+i = 0
+j = 1
+i = 1
+i = 2
+*/

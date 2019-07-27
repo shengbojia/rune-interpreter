@@ -1,0 +1,4 @@
+var bool = true;
+if (bool) {
+    break; // expect error 'Cannot break if not in a loop.'
+}
