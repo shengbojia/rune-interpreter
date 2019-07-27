@@ -77,6 +77,15 @@ public class Lox {
             return;
         }
 
+        // run the resolver
+        Resolver resolver = new Resolver(interpreter);
+        resolver.resolve(statements);
+
+        // Stop if a resolution error occurs
+        if (hadError) {
+            return;
+        }
+
         interpreter.interpret(statements);
 
         // Below is for testing the parser

@@ -117,6 +117,7 @@ public class Parser {
      *             | ifStatement
      *             | printStatement
      *             | returnStatement
+     *             | breakStatement
      *             | whileStatement
      *             | block ;
      */
@@ -129,6 +130,8 @@ public class Parser {
             return printStatement();
         } else if (match(RETURN)) {
             return returnStatement();
+        } else if (match(BREAK)) {
+            return breakStatement();
         } else if (match(WHILE)) {
             return whileStatement();
         } else if (match(LEFT_BRACE)) {
@@ -241,8 +244,18 @@ public class Parser {
             value = expression();
         }
 
-        consume(SEMICOLON, "Expect ';' after return value");
+        consume(SEMICOLON, "Expect ';' after return value.");
         return new Stmt.Return(keyword, value);
+    }
+
+    /**
+     * breakStatement  -> "break" ";" ;
+     */
+    private Stmt breakStatement() {
+        Token keyword = previous();
+
+        consume(SEMICOLON, "Expect ';' after 'break' keyword.");
+        return new Stmt.Break(keyword);
     }
 
     /**

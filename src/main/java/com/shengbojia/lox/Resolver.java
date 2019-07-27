@@ -16,6 +16,16 @@ import java.util.Stack;
 public class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
     private final Interpreter interpreter;
     private final Stack<Map<String, Boolean>> scopes = new Stack<>();
+    private FunctionType currentFunction = FunctionType.NONE;
+    private boolean inALoop = false;
+
+    /**
+     * Enum for what kind of function the resolver is currently in
+     */
+    private enum FunctionType {
+        NONE,
+        FUNCTION
+    }
 
     Resolver(Interpreter interpreter) {
         this.interpreter = interpreter;
@@ -48,7 +58,13 @@ public class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
             return;
         }
 
-        scopes.peek().put(name.lexeme, false);
+        Map<String, Boolean> scope = scopes.peek();
+        // I will allow multiple declaration of same name in global, but not locally
+        if (scope.containsKey(name.lexeme)) {
+            Lox.error(name, "Variable with the same name already defined in this scope.");
+        }
+
+        scope.put(name.lexeme, false);
     }
 
     private void define(Token name) {
@@ -70,7 +86,11 @@ public class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
         // not found locally
     }
 
-    private void resolveFunction(Stmt.Function function) {
+    private void resolveFunction(Stmt.Function function, FunctionType type) {
+        // keep track of enclosing
+        FunctionType enclosingType = currentFunction;
+        currentFunction = type;
+
         beginScope();
         // resolve function params inside scope
         for (Token param : function.params) {
@@ -81,6 +101,9 @@ public class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
         // resolve any local var in function body
         resolve(function.body);
         endScope();
+
+        // pop back to enclosing
+        currentFunction = enclosingType;
     }
 
     @Override
@@ -105,7 +128,7 @@ public class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
         define(stmt.name);
 
         // step into the function's scope and resolve param/var inside
-        resolveFunction(stmt);
+        resolveFunction(stmt, FunctionType.FUNCTION);
         return null;
     }
 
@@ -127,8 +150,22 @@ public class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
 
     @Override
     public Void visitReturnStmt(Stmt.Return stmt) {
+        // Make sure the return stmt is actually in a function
+        if (currentFunction == FunctionType.NONE) {
+            Lox.error(stmt.keyword, "Cannot return from top-level code.");
+        }
+
         if (stmt.value != null) {
             resolve(stmt.value);
+        }
+
+        return null;
+    }
+
+    @Override
+    public Void visitBreakStmt(Stmt.Break stmt) {
+        if (!inALoop) {
+            Lox.error(stmt.keyword, "Cannot use break when not in a loop.");
         }
 
         return null;
@@ -147,8 +184,13 @@ public class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
 
     @Override
     public Void visitWhileStmt(Stmt.While stmt) {
+        boolean enclosedInLoop = inALoop;
+        inALoop = true;
+
         resolve(stmt.condition);
         resolve(stmt.body);
+
+        inALoop = enclosedInLoop;
         return null;
     }
 

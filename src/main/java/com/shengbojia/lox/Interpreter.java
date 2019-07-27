@@ -5,13 +5,16 @@ import com.shengbojia.lox.ast.Stmt;
 import com.shengbojia.lox.callables.LoxCallable;
 import com.shengbojia.lox.callables.LoxFunction;
 import com.shengbojia.lox.callables.LoxLambda;
+import com.shengbojia.lox.throwables.Break;
 import com.shengbojia.lox.throwables.Return;
 import com.shengbojia.lox.throwables.RuntimeError;
 import com.shengbojia.lox.token.Token;
 import com.shengbojia.lox.token.TokenType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Class that deals with the semantics of interpreting an abstract syntax tree.
@@ -23,6 +26,9 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
     // dynamic reference to the current scope
     private Environment environment = globals;
+
+    // keeps track of how "deep" each variable ref is down the environment chain
+    private final Map<Expr, Integer> locals = new HashMap<>();
 
     Interpreter() {
         // Native function clock()
@@ -76,16 +82,41 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
         return o.toString();
     }
 
-    void resolve(Expr expr, int filler) {}
+    /**
+     * Records each variable ref along with its depth in the environment chain.
+     *
+     * @param expr the variable ref
+     * @param depth how many steps down the environment chain from the current one
+     */
+    void resolve(Expr expr, int depth) {
+        locals.put(expr, depth);
+    }
 
+    /**
+     * Calls the accept() method of the expression to be evaluated.
+     *
+     * @param expr expression to be evaluate
+     * @return value of expression
+     */
     private Object evaluate(Expr expr) {
         return expr.accept(this);
     }
 
+    /**
+     * Calls the accept() method of the statement to execute.
+     *
+     * @param stmt statement to execute
+     */
     private void execute(Stmt stmt) {
         stmt.accept(this);
     }
 
+    /**
+     * Enters a new scope/environment and executes each statement within the block.
+     *
+     * @param statements the statements in the block to execute
+     * @param environment the scope for the execution of the statements
+     */
     public void executeBlock(List<Stmt> statements, Environment environment) {
 
         // The environment right as this method is being called
@@ -145,9 +176,18 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
     }
 
     @Override
+    public Void visitBreakStmt(Stmt.Break stmt) {
+        throw new Break();
+    }
+
+    @Override
     public Void visitWhileStmt(Stmt.While stmt) {
         while (isTruthy(evaluate(stmt.condition))) {
-            execute(stmt.body);
+            try {
+                execute(stmt.body);
+            } catch (Break b) {
+                break;
+            }
         }
 
         return null;
@@ -177,7 +217,13 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
     public Object visitAssignExpr(Expr.Assign expr) {
         Object value = evaluate(expr.value);
 
-        environment.assign(expr.name, value);
+        Integer distannce = locals.get(expr);
+        if (distannce != null) {
+            environment.assignAt(distannce, expr.name, value);
+        } else {
+            globals.assign(expr.name, value);
+        }
+
         return value;
     }
 
@@ -239,7 +285,18 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
     @Override
     public Object visitVariableExpr(Expr.Variable expr) {
-        return environment.get(expr.name);
+        return lookUpVariable(expr.name, expr);
+    }
+
+    private Object lookUpVariable(Token name, Expr expr) {
+        Integer distance = locals.get(expr);
+
+        // if distance is null, we assume its a global
+        if (distance != null) {
+            return environment.getAt(distance, name);
+        } else {
+            return globals.get(name);
+        }
     }
 
     /**

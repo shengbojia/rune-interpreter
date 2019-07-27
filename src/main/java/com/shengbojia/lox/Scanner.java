@@ -36,6 +36,7 @@ public class Scanner {
         keywords.put("or", OR);
         keywords.put("print", PRINT);
         keywords.put("return", RETURN);
+        keywords.put("break", BREAK);
         keywords.put("super", SUPER);
         keywords.put("this", THIS);
         keywords.put("true", TRUE);
