@@ -7,6 +7,9 @@ Rune is a dynamically-typed, OOP "mini-language" I made to learn interpreters an
   * [Setup](#setup)
   * [Running the interpreter](#running-the-interpreter)
 * [The Rune Language](#the-rune-language)
+  * [Intro to Rune](#an-introduction-to-rune)
+  * [Data Types](#data-types)
+  * [Expressions](#expressions)
 
 ## The Interpreter
 
