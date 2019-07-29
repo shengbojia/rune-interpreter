@@ -6,6 +6,9 @@ import com.shengbojia.lox.token.Token;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Similar to Python, I will be allowing for fields to be added dynamically to object instances.
+ */
 public class LoxInstance {
     private LoxClass loxClass;
     private final Map<String, Object> fields = new HashMap<>();
@@ -15,11 +18,23 @@ public class LoxInstance {
     }
 
     public Object getProperty(Token name) {
+
+        // Look for fields first, want fields to shadow methods
         if (fields.containsKey(name.lexeme)) {
             return fields.get(name.lexeme);
         }
 
+        // If not matching field is found, try looking for a method
+        LoxFunction method = loxClass.findMethod(name.lexeme);
+        if (method != null) {
+            return method;
+        }
+
         throw new RuntimeError(name, "No such property found: '" + name.lexeme + "' .");
+    }
+
+    public void setField(Token name, Object value) {
+        fields.put(name.lexeme, value);
     }
 
     @Override

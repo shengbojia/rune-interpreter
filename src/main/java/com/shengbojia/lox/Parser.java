@@ -332,7 +332,7 @@ public class Parser {
     }
 
     /**
-     * assignment  -> IDENTIFIER "=" assignment
+     * assignment  -> ( call "." )? IDENTIFIER "=" assignment
      *              | conditional ;
      */
     private Expr assignment() {
@@ -345,6 +345,10 @@ public class Parser {
             if (expr instanceof Expr.Variable) {
                 Token name = ((Expr.Variable) expr).name;
                 return new Expr.Assign(name, value);
+            } else if (expr instanceof Expr.Get) {
+                // convert the getter and the value to be assigned into a corresponding setter
+                Expr.Get getter = (Expr.Get) expr;
+                return new Expr.Set(getter.object, getter.name, value);
             }
 
             error(equals, "Invalid assignment target.");
@@ -493,6 +497,8 @@ public class Parser {
     }
 
     /**
+     * Could be a chain of calls/property gets.
+     * <p>
      * call  -> primary ( "(" arguments? ")" | "." IDENTIFIER )* ;
      */
     private Expr call() {

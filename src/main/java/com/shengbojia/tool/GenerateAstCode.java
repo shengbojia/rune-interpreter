@@ -30,6 +30,7 @@ public class GenerateAstCode {
                 "Get      : Expr object, Token name",
                 "Literal  : Object value",
                 "Logical  : Expr left, Token operator, Expr right",
+                "Set      : Expr object, Token name, Expr value",
                 "Unary    : Token operator, Expr right",
                 "Lambda   : List<Token> params, List<Stmt> body",
                 "Variable : Token name"

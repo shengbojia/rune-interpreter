@@ -7,6 +7,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Parser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Resolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Resolver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/ast/Expr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/ast/Expr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/callables/LoxClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/callables/LoxClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/callables/LoxInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/callables/LoxInstance.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/tool/GenerateAstCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/tool/GenerateAstCode.java" afterDir="false" />
     </list>
@@ -129,7 +130,7 @@
       <workItem from="1564117234539" duration="2299000" />
       <workItem from="1564173772731" duration="7794000" />
       <workItem from="1564274407542" duration="2441000" />
-      <workItem from="1564361999687" duration="2360000" />
+      <workItem from="1564361999687" duration="4474000" />
     </task>
     <servers />
   </component>
@@ -154,7 +155,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Parser.java</url>
-          <line>386</line>
+          <line>390</line>
           <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>

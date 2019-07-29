@@ -24,6 +24,8 @@ public abstract class Expr {
 
         R visitLogicalExpr(Logical expr);
 
+        R visitSetExpr(Set expr);
+
         R visitUnaryExpr(Unary expr);
 
         R visitLambdaExpr(Lambda expr);
@@ -157,6 +159,23 @@ public abstract class Expr {
         public final Expr left;
         public final Token operator;
         public final Expr right;
+    }
+
+    public static class Set extends Expr {
+
+        public Set(Expr object, Token name, Expr value) {
+            this.object = object;
+            this.name = name;
+            this.value = value;
+        }
+
+        public <R> R accept(Visitor<R> visitor) {
+            return visitor.visitSetExpr(this);
+        }
+
+        public final Expr object;
+        public final Token name;
+        public final Expr value;
     }
 
     public static class Unary extends Expr {
