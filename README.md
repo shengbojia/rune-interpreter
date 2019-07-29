@@ -2,7 +2,15 @@
 
 Rune is a dynamically-typed, OOP "mini-language" I made to learn interpreters and compilers.
 
-## Setup
+## Table of Contents
+* [The Interpreter](#the-interpreter)
+  * [Setup](#setup)
+  * [Running the interpreter](#running-the-interpreter)
+* [The Rune Language](#the-rune-language)
+
+## The Interpreter
+
+### Setup
 Clone or download the project:
 ```sh
 $ git clone https://github.com/shengbojia/rune-interpreter.git
@@ -13,7 +21,7 @@ $ javac src/main/java/com/shengbojia/rune/*.java
 ```
 
 Great! Now that the interpreter is built, let's move on to actually running it.
-## Running the interpreter
+### Running the interpreter
 There are two ways to use the interpreter.
 1. Execute it without any arguments:
 ```sh
@@ -51,4 +59,34 @@ Hello, world.
 
 Process finished with exit code 0
 ```
-That's all there is to it. Feel free to add more features to the Rune language if you like.
+That's all there is to using the interpreter.
+
+## The Rune Language
+
+### An Introduction to Rune
+```
+// Example code, notice the C-style comments and semi-colon ending
+print "Hello, world.";
+```
+A dynamically-typed language with operators and syntax very similar to C.
+
+### Data Types
+#### Boolean
+Dedicated boolean type with two literal values, true and false.
+```
+true;
+false;
+```
+#### Numbers
+Rune only has double-precision floats, which represent both integers and decimals.
+```
+42;   // an integer
+4.2;  // a decimal
+```
+#### Strings
+String literals are enclosed in double-quotes just like in C.
+```
+"This is a string.";
+"42"; // string, not a number
+"";   // empty string
+```
