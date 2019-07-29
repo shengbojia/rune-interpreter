@@ -71,6 +71,7 @@ print "Hello, world.";
 A dynamically-typed language with operators and syntax very similar to C.
 
 ### Data Types
+Some fundamental, built-in data types.
 #### Boolean
 Dedicated boolean type with two literal values, true and false.
 ```C
@@ -92,3 +93,31 @@ String literals are enclosed in double-quotes just like in C.
 ```
 #### Nil
 ```nil``` is the Rune equivalent of Java or C's ```null```
+
+### Expressions
+Common expressions found in all sorts of languages.
+#### Arithmetic
+```C
+3 + x;
+y - 5;
+i * j;
+4 / 2;
+-negateMe;
+```
+All these operators work on numbers and it is an error to pass any other types to them. The exception being ```+``` which can take strings and concatenate them.
+
+#### Comparison & Equality
+```C
+1 < 2;   // true
+3 <= 3;  // true
+4 > 4;   // false
+-1 >= 0; // false
+```
+And ```==``` works similar to java's ```equals()```:
+```C
+1 == 2;         // false
+"cat" == "cat"; // true (remember '==' is like java's equals() rather than java's '==')
+42 == "cat";    // false
+42 == "42";     // false (different types are never equal)
+nil == nil;     // true (nil is ONLY equal to nil)
+```
