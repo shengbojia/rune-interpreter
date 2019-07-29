@@ -3,14 +3,296 @@
   <component name="ChangeListManager">
     <list default="true" id="f8765254-c9e3-4554-8930-336eb2d76c90" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Interpreter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Resolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Resolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/ast/Expr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/ast/Expr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/callables/LoxClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/callables/LoxClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/callables/LoxFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/callables/LoxFunction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/callables/LoxInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/callables/LoxInstance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/tool/GenerateAstCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/tool/GenerateAstCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Environment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lex/Environment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lex/Interpreter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Lox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lex/Lox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lex/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Resolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lex/Resolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Scanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lex/Scanner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/ast/Expr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lex/ast/Expr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/ast/Stmt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lex/ast/Stmt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/callables/LoxCallable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lex/callables/LoxCallable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/callables/LoxClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lex/callables/LoxClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/callables/LoxFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lex/callables/LoxFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/callables/LoxInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lex/callables/LoxInstance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/callables/LoxLambda.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lex/callables/LoxLambda.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/throwables/Break.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lex/throwables/Break.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/throwables/ParseError.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lex/throwables/ParseError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/throwables/Return.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lex/throwables/Return.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/throwables/RuntimeError.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lex/throwables/RuntimeError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/token/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lex/token/Token.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shengbojia/lox/token/TokenType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shengbojia/lex/token/TokenType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/assignment/associativity.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/assignment/global.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/assignment/grouping.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/assignment/infix_operator.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/assignment/local.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/assignment/prefix_operator.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/assignment/syntax.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/assignment/to_this.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/assignment/undefined.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/benchmark/binary_trees.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/benchmark/equality.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/benchmark/fib.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/benchmark/invocation.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/benchmark/method_call.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/benchmark/properties.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/benchmark/string_equality.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/block/empty.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/block/nested.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/block/scope.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/bool/equality.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/bool/not.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/break/nested_loops.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/break/not_in_loop.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/call/bool.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/call/nil.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/call/num.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/call/object.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/call/string.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/class/empty.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/class/inherit_self.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/class/inherited_method.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/class/local_inherit_other.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/class/local_inherit_self.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/class/local_reference_self.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/class/reference_self.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/closure/assign_to_closure.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/closure/assign_to_shadowed_later.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/closure/close_over_function_parameter.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/closure/close_over_later_variable.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/closure/close_over_method_parameter.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/closure/closed_closure_in_function.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/closure/nested_closure.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/closure/open_closure_in_function.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/closure/reference_closure_multiple_times.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/closure/reuse_closure_slot.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/closure/shadow_closure_with_local.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/closure/unused_closure.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/closure/unused_later_closure.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/comma/assignment.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/comments/line_at_eof.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/comments/only_line_comment.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/comments/only_line_comment_and_line.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/comments/unicode.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/conditional/assignment_precedence.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/conditional/side_effect.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/constructor/arguments.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/constructor/call_init_early_return.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/constructor/call_init_explicitly.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/constructor/default.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/constructor/default_arguments.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/constructor/early_return.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/constructor/extra_arguments.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/constructor/init_not_method.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/constructor/missing_arguments.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/constructor/return_in_nested_function.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/constructor/return_value.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/empty_file.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/expressions/evaluate.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/expressions/parse.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/fibonacci.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/call_function_field.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/call_nonfunction_field.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/get_and_set_method.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/get_on_bool.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/get_on_class.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/get_on_function.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/get_on_nil.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/get_on_num.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/get_on_string.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/many.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/method.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/method_binds_this.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/on_instance.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/set_evaluation_order.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/set_on_bool.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/set_on_class.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/set_on_function.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/set_on_nil.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/set_on_num.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/set_on_string.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/field/undefined.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/for/class_in_body.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/for/closure_in_body.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/for/count_to_5.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/for/fun_in_body.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/for/return_closure.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/for/return_inside.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/for/scope.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/for/statement_condition.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/for/statement_increment.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/for/statement_initializer.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/for/syntax.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/for/var_in_body.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/function/body_must_be_block.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/function/empty_body.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/function/extra_arguments.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/function/local_mutual_recursion.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/function/local_recursion.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/function/missing_arguments.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/function/missing_comma_in_parameters.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/function/mutual_recursion.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/function/parameters.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/function/print.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/function/recursion.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/function/scope.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/function/too_many_arguments.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/function/too_many_parameters.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/hello_world.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/if/class_in_else.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/if/class_in_then.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/if/dangling_else.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/if/else.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/if/fun_in_else.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/if/fun_in_then.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/if/if.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/if/truth.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/if/var_in_else.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/if/var_in_then.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/inheritance/constructor.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/inheritance/inherit_from_function.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/inheritance/inherit_from_nil.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/inheritance/inherit_from_number.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/inheritance/inherit_methods.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/inheritance/parenthesized_superclass.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/inheritance/set_fields_from_base_class.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/lambda/pass_as_arg.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/limit/loop_too_large.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/limit/no_reuse_constants.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/limit/stack_overflow.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/limit/too_many_constants.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/limit/too_many_locals.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/limit/too_many_upvalues.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/logical_operator/and.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/logical_operator/and_truth.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/logical_operator/or.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/logical_operator/or_truth.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/method/arity.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/method/empty_block.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/method/extra_arguments.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/method/missing_arguments.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/method/not_found.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/method/print_bound_method.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/method/refer_to_name.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/method/too_many_arguments.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/method/too_many_parameters.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/nil/literal.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/number/decimal_point_at_eof.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/number/leading_dot.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/number/literals.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/number/trailing_dot.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/add.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/add_bool_nil.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/add_bool_num.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/add_bool_string.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/add_nil_nil.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/add_num_nil.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/add_string_nil.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/comparison.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/divide.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/divide_nonnum_num.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/divide_num_nonnum.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/equals.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/equals_class.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/equals_method.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/greater_nonnum_num.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/greater_num_nonnum.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/greater_or_equal_nonnum_num.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/greater_or_equal_num_nonnum.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/less_nonnum_num.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/less_num_nonnum.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/less_or_equal_nonnum_num.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/less_or_equal_num_nonnum.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/multiply.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/multiply_nonnum_num.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/multiply_num_nonnum.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/negate.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/negate_nonnum.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/not.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/not_class.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/not_equals.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/subtract.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/subtract_nonnum_num.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/operator/subtract_num_nonnum.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/precedence.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/print/missing_argument.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/regression/394.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/regression/40.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/return/after_else.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/return/after_if.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/return/after_while.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/return/at_top_level.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/return/in_function.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/return/in_method.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/return/return_nil_if_no_value.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/scanning/identifiers.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/scanning/keywords.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/scanning/numbers.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/scanning/punctuators.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/scanning/strings.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/scanning/whitespace.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/string/error_after_multiline.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/string/literals.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/string/multiline.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/string/unterminated.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/super/bound_method.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/super/call_other_method.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/super/call_same_method.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/super/closure.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/super/constructor.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/super/extra_arguments.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/super/indirectly_inherited.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/super/missing_arguments.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/super/no_superclass_bind.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/super/no_superclass_call.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/super/no_superclass_method.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/super/parenthesized.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/super/reassign_superclass.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/super/super_at_top_level.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/super/super_in_closure_in_inherited_method.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/super/super_in_inherited_method.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/super/super_in_top_level_function.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/super/super_without_dot.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/super/super_without_name.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/super/this_in_superclass_method.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/this/closure.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/this/nested_class.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/this/nested_closure.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/this/this_at_top_level.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/this/this_in_method.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/this/this_in_top_level_function.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/unexpected_character.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/collide_with_parameter.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/duplicate_local.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/duplicate_parameter.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/early_bound.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/in_middle_of_block.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/in_nested_block.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/local_from_method.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/redeclare_global.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/redefine_global.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/scope_reuse_in_different_blocks.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/shadow_and_local.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/shadow_global.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/shadow_local.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/undefined_global.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/undefined_local.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/uninitialized.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/unreached_undefined.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/use_false_as_var.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/use_global_in_initializer.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/use_local_in_initializer.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/use_nil_as_var.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/variable/use_this_as_var.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/while/class_in_body.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/while/closure_in_body.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/while/count_to_5.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/while/fun_in_body.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/while/return_closure.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/while/return_inside.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/while/syntax.lox" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/LoxFiles/while/var_in_body.lox" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -89,11 +371,11 @@
       </method>
     </configuration>
     <configuration name="Lox" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.shengbojia.lox.Lox" />
+      <option name="MAIN_CLASS_NAME" value="com.shengbojia.lex.Lox" />
       <module name="LoxInterpreter" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.shengbojia.lox.callables.*" />
+          <option name="PATTERN" value="com.shengbojia.lex.callables.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -131,7 +413,7 @@
       <workItem from="1564117234539" duration="2299000" />
       <workItem from="1564173772731" duration="7794000" />
       <workItem from="1564274407542" duration="2441000" />
-      <workItem from="1564361999687" duration="7734000" />
+      <workItem from="1564361999687" duration="10700000" />
     </task>
     <servers />
   </component>
@@ -155,7 +437,7 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/shengbojia/lox/Parser.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/shengbojia/lex/Parser.java</url>
           <line>390</line>
           <option name="timeStamp" value="34" />
         </line-breakpoint>

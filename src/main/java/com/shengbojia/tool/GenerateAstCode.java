@@ -74,7 +74,7 @@ public class GenerateAstCode {
         writer.println("package " + packageName + ";");
         writer.println();
 
-        writer.println("import com.shengbojia.lox.token.Token;");
+        writer.println("import com.shengbojia.rune.token.Token;");
         writer.println();
         writer.println("import java.util.List;");
         writer.println();
