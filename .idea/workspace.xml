@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f8765254-c9e3-4554-8930-336eb2d76c90" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="abe4636e-8a3e-4578-8c6c-794c2eb1f2b4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoxInterpreter.iml" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,48 +16,17 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DefaultGradleProjectSettings">
-    <option name="isMigrated" value="true" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Interface" />
-        <option value="Kotlin File" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="JsbtTreeLayoutManager">
-    <layout place="tools.popupGrunt">
-      <scroll-view-position x="0" y="0" />
-    </layout>
-  </component>
-  <component name="ProjectId" id="1OWjBdVSulM2bXT8WTRL0OvBigF" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="1OhLfY6COaA9gWmK08OuooogxTi" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/res/LoxFiles" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.excludes" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Frost\IdeaProjects\SideProjects\LoxInterpreter\src\main" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Frost\IdeaProjects\SideProjects\LoxInterpreter\src\main\res\LoxFiles" />
-    </key>
+    <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -65,65 +40,14 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.GenerateAstCode">
-    <configuration name="GenerateAstCode" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.shengbojia.tool.GenerateAstCode" />
-      <module name="LoxInterpreter" />
-      <option name="PROGRAM_PARAMETERS" value="C:\Users\Frost\IdeaProjects\SideProjects\LoxInterpreter\src\main\java\com\shengbojia\lox\ast com.shengbojia.lox.ast" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.shengbojia.tool.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Rune" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.shengbojia.rune.Rune" />
-      <module name="LoxInterpreter" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.shengbojia.rune.callables.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.GenerateAstCode" />
-      <item itemvalue="Application.Rune" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.GenerateAstCode" />
-        <item itemvalue="Application.Rune" />
-      </list>
-    </recent_temporary>
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f8765254-c9e3-4554-8930-336eb2d76c90" name="Default Changelist" comment="" />
-      <created>1562628169219</created>
+      <changelist id="abe4636e-8a3e-4578-8c6c-794c2eb1f2b4" name="Default Changelist" comment="" />
+      <created>1564424986008</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1562628169219</updated>
-      <workItem from="1562628171247" duration="7259000" />
-      <workItem from="1562645247761" duration="9535000" />
-      <workItem from="1562814785734" duration="599000" />
-      <workItem from="1562885727247" duration="6778000" />
-      <workItem from="1563074795606" duration="39849000" />
-      <workItem from="1563773310175" duration="16559000" />
-      <workItem from="1563915591967" duration="144000" />
-      <workItem from="1563915760023" duration="27334000" />
-      <workItem from="1564100119619" duration="3028000" />
-      <workItem from="1564117234539" duration="2299000" />
-      <workItem from="1564173772731" duration="7794000" />
-      <workItem from="1564274407542" duration="2441000" />
-      <workItem from="1564361999687" duration="11174000" />
+      <updated>1564424986008</updated>
+      <workItem from="1564424988275" duration="278000" />
     </task>
     <servers />
   </component>
@@ -135,117 +59,10 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/shengbojia/rune/Parser.java</url>
-          <line>390</line>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-    <watches-manager>
-      <configuration name="Application">
-        <watch expression="((HashMap.Node)((HashMap)((Environment)((Interpreter)visitor).environment).values).entrySet().toArray()[0]).getKey()" language="JAVA" custom="com.shengbojia.lox.Interpreter,java.util.HashMap.Node,java.util.HashMap,com.shengbojia.lox.Environment" />
-        <watch expression="((HashMap.Node)((HashMap)((Environment)((Interpreter)visitor).environment).values).entrySet().toArray()[0]).getKey()" language="JAVA" custom="com.shengbojia.lox.Interpreter,java.util.HashMap.Node,java.util.HashMap,com.shengbojia.lox.Environment" />
-      </configuration>
-    </watches-manager>
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Lox_Interpreter$Lox.ic" NAME="Lox Coverage Results" MODIFIED="1562689937516" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.shengbojia.lox.*</FILTER>
-    </SUITE>
-  </component>
-  <component name="debuggerHistoryManager">
-    <expressions id="watch">
-      <expression>
-        <expression-string>((HashMap.Node)((HashMap)((Environment)((Interpreter)visitor).environment).values).entrySet().toArray()[0]).getKey()</expression-string>
-        <language-id>JAVA</language-id>
-        <custom-info>com.shengbojia.lox.Interpreter,java.util.HashMap.Node,java.util.HashMap,com.shengbojia.lox.Environment</custom-info>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-    </expressions>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>LoxInterpreter</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>
