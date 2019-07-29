@@ -18,6 +18,8 @@ public abstract class Expr {
 
         R visitGroupingExpr(Grouping expr);
 
+        R visitGetExpr(Get expr);
+
         R visitLiteralExpr(Literal expr);
 
         R visitLogicalExpr(Logical expr);
@@ -110,6 +112,21 @@ public abstract class Expr {
         }
 
         public final Expr expression;
+    }
+
+    public static class Get extends Expr {
+
+        public Get(Expr object, Token name) {
+            this.object = object;
+            this.name = name;
+        }
+
+        public <R> R accept(Visitor<R> visitor) {
+            return visitor.visitGetExpr(this);
+        }
+
+        public final Expr object;
+        public final Token name;
     }
 
     public static class Literal extends Expr {
