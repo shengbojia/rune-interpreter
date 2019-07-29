@@ -40,13 +40,13 @@ Hello, world.
 rune>>
 ```
 
-2. Execute with one argument, the path to the .rune file you want to interpret:
+2. Execute with one argument, the path to the ```.rune``` file you want to interpret:
 ```sh
 $ java Rune <path-to-rune-file>
 ```
-Say for example we wanted to run one of the .rune files in this repo.
+Say for example we wanted to run one of the ```.rune``` files in this repo.
 hello_world.rune
-```python
+```C
 print "Hello, world.";
 ```
 Then we would do it like so:
@@ -64,7 +64,7 @@ That's all there is to using the interpreter.
 ## The Rune Language
 
 ### An Introduction to Rune
-```
+```C
 // Example code, notice the C-style comments and semi-colon ending
 print "Hello, world.";
 ```
@@ -73,20 +73,22 @@ A dynamically-typed language with operators and syntax very similar to C.
 ### Data Types
 #### Boolean
 Dedicated boolean type with two literal values, true and false.
-```
+```C
 true;
 false;
 ```
 #### Numbers
 Rune only has double-precision floats, which represent both integers and decimals.
-```
+```C
 42;   // an integer
 4.2;  // a decimal
 ```
 #### Strings
 String literals are enclosed in double-quotes just like in C.
-```
+```C
 "This is a string.";
 "42"; // string, not a number
 "";   // empty string
 ```
+#### Nil
+```nil``` is the Rune equivalent of Java or C's ```null```
