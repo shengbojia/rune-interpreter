@@ -59,8 +59,8 @@ public class Environment {
      * @param name     the name of the variable to look for
      * @return the variable
      */
-    Object getAt(int distance, Token name) {
-        return moveUp(distance).values.get(name.lexeme);
+    public Object getAt(int distance, String name) {
+        return moveUp(distance).values.get(name);
     }
 
     /**

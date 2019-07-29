@@ -203,11 +203,13 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
         Map<String, LoxFunction> methods = new HashMap<>();
         for (Stmt.Function method : stmt.methods) {
-            LoxFunction function = new LoxFunction(method, environment);
+            LoxFunction function = new LoxFunction(method, environment,
+                    method.name.lexeme.equals("init"));
+
             methods.put(method.name.lexeme, function);
         }
 
-        LoxClass loxClass = new LoxClass(stmt.name.lexeme);
+        LoxClass loxClass = new LoxClass(stmt.name.lexeme, methods);
         environment.assign(stmt.name, loxClass);
 
         return null;
@@ -282,6 +284,11 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
     }
 
     @Override
+    public Object visitThisExpr(Expr.This expr) {
+        return lookUpVariable(expr.keyword, expr);
+    }
+
+    @Override
     public Object visitGroupingExpr(Expr.Grouping expr) {
         // Simply evaluate the subexpression within the grouping
         return evaluate(expr.expression);
@@ -321,7 +328,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
         // if distance is null, we assume its a global
         if (distance != null) {
-            return environment.getAt(distance, name);
+            return environment.getAt(distance, name.lexeme);
         } else {
             return globals.get(name);
         }

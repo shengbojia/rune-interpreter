@@ -560,6 +560,8 @@ public class Parser {
             return new Expr.Literal(null);
         } else if (match(NUMBER, STRING)) {
             return new Expr.Literal(previous().literal);
+        } else if (match(THIS)) {
+            return new Expr.This(previous());
         } else if (match(IDENTIFIER)) {
             return new Expr.Variable(previous());
         } else if (match(LEFT_PAREN)) {

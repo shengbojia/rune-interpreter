@@ -27,7 +27,8 @@ public class LoxInstance {
         // If not matching field is found, try looking for a method
         LoxFunction method = loxClass.findMethod(name.lexeme);
         if (method != null) {
-            return method;
+            // a new method ref with instance ref "this" in its closure
+            return method.bind(this);
         }
 
         throw new RuntimeError(name, "No such property found: '" + name.lexeme + "' .");

@@ -16,16 +16,27 @@ import java.util.Stack;
 public class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
     private final Interpreter interpreter;
     private final Stack<Map<String, Boolean>> scopes = new Stack<>();
+
     private FunctionType currentFunction = FunctionType.NONE;
     private boolean inALoop = false;
+    private ClassType currentClass = ClassType.NONE;
 
     /**
-     * Enum for what kind of function the resolver is currently in
+     * Enum for what kind of function body the resolver is currently in
      */
     private enum FunctionType {
         NONE,
         FUNCTION,
+        INIT,
         METHOD
+    }
+
+    /**
+     * Enum for what kind of class body the resolver is currently in
+     */
+    private enum ClassType {
+        NONE,
+        CLASS
     }
 
     Resolver(Interpreter interpreter) {
@@ -89,7 +100,7 @@ public class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
 
     private void resolveFunction(Stmt.Function function, FunctionType type) {
         // keep track of enclosing
-        FunctionType enclosingType = currentFunction;
+        FunctionType enclosingFuncType = currentFunction;
         currentFunction = type;
 
         beginScope();
@@ -104,7 +115,7 @@ public class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
         endScope();
 
         // pop back to enclosing
-        currentFunction = enclosingType;
+        currentFunction = enclosingFuncType;
     }
 
     @Override
@@ -118,13 +129,26 @@ public class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
 
     @Override
     public Void visitClassStmt(Stmt.Class stmt) {
+        ClassType enclosingClassType = currentClass;
+        currentClass = ClassType.CLASS;
+
         declare(stmt.name);
         define(stmt.name);
 
+        // push a new scope and define "this" as a variable
+        beginScope();
+        scopes.peek().put("this", true);
+
         for (Stmt.Function method : stmt.methods) {
             FunctionType declaration = FunctionType.METHOD;
+            if (method.name.lexeme.equals("init")) {
+                declaration = FunctionType.INIT;
+            }
             resolveFunction(method, declaration);
         }
+
+        endScope();
+        currentClass = enclosingClassType;
 
         return null;
     }
@@ -170,6 +194,9 @@ public class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
         }
 
         if (stmt.value != null) {
+            if (currentFunction == FunctionType.INIT) {
+                Lox.error(stmt.keyword, "Cannot return a value from an instance initializer.");
+            }
             resolve(stmt.value);
         }
 
@@ -282,6 +309,16 @@ public class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
         resolve(expr.value);
         resolve(expr.object);
 
+        return null;
+    }
+
+    @Override
+    public Void visitThisExpr(Expr.This expr) {
+        if (currentClass == ClassType.NONE) {
+            Lox.error(expr.keyword, "Cannot use 'this' outside a class.");
+            return null;
+        }
+        resolveLocal(expr, expr.keyword);
         return null;
     }
 
