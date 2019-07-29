@@ -45,13 +45,16 @@ public class Parser {
     }
 
     /**
-     * declaration  -> funDeclaration
+     * declaration  -> classDeclaration
+     *               | funDeclaration
      *               | varDeclaration
      *               | statement ;
      */
     private Stmt declaration() {
         try {
-            if (match(FUN)) {
+            if (match(CLASS)) {
+                return classDeclaration();
+            } else if (match(FUN)) {
                 return function("function");
             } else if (match(VAR)) {
                 return varDeclaration();
@@ -63,6 +66,22 @@ public class Parser {
             synchronize();
             return null;
         }
+    }
+
+    /**
+     * classDeclaration  -> "class" IDENTIFIER "{" function* "}" ;
+     */
+    private Stmt classDeclaration() {
+        Token name = consume(IDENTIFIER, "Class declaration requires a name.");
+        consume(LEFT_BRACE, "Expect '{' before class body.");
+
+        List<Stmt.Function> methods = new ArrayList<>();
+        while (!check(RIGHT_BRACE) && !reachedEnd()) {
+            methods.add(function("method"));
+        }
+
+        consume(RIGHT_BRACE, "Expect closing '}' after class body.");
+        return new Stmt.Class(name, methods);
     }
 
     /**
@@ -474,7 +493,7 @@ public class Parser {
     }
 
     /**
-     * call  -> primary ( "(" arguments? ")" )* ;
+     * call  -> primary ( "(" arguments? ")" | "." IDENTIFIER )* ;
      */
     private Expr call() {
         Expr expr = primary();

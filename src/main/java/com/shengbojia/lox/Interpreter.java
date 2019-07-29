@@ -2,6 +2,7 @@ package com.shengbojia.lox;
 
 import com.shengbojia.lox.ast.Expr;
 import com.shengbojia.lox.ast.Stmt;
+import com.shengbojia.lox.callables.LoxClass;
 import com.shengbojia.lox.callables.LoxCallable;
 import com.shengbojia.lox.callables.LoxFunction;
 import com.shengbojia.lox.callables.LoxLambda;
@@ -196,6 +197,15 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
     @Override
     public Void visitBlockStmt(Stmt.Block stmt) {
         executeBlock(stmt.statements, new Environment(environment));
+        return null;
+    }
+
+    @Override
+    public Void visitClassStmt(Stmt.Class stmt) {
+        environment.define(stmt.name.lexeme, null);
+        LoxClass loxClass = new LoxClass(stmt.name.lexeme);
+        environment.assign(stmt.name, loxClass);
+
         return null;
     }
 
