@@ -32,8 +32,15 @@ public class RuneClass extends RuneInstance implements RuneCallable, RuneClassDe
 
     @Override
     public RuneFunction findMethod(String name) {
+        // First look for the method in the current class
         if (methods.containsKey(name)) {
             return methods.get(name);
+        }
+
+        // If the method cannot be found in the current  class, walk up the inheritance hierarchy and look for it
+        // in the superclass
+        if (superClass != null) {
+            return superClass.findMethod(name);
         }
 
         return null;

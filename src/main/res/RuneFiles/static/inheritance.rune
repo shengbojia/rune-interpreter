@@ -1,0 +1,11 @@
+// Make sure class methods are inherited as well
+class Foo {
+    static funA(n) {
+        print n;
+    }
+}
+
+class FooSub : Foo {
+}
+
+FooSub.funA(3); // expect: 3

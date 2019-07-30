@@ -10,7 +10,7 @@ import java.util.Map;
  * Similar to Python, I will be allowing for fields to be added dynamically to object instances.
  */
 public class RuneInstance {
-    RuneClassDesc runeClassDesc;
+    public RuneClassDesc runeClassDesc;
     private final Map<String, Object> fields = new HashMap<>();
 
     RuneInstance(RuneClassDesc runeClassDesc) {

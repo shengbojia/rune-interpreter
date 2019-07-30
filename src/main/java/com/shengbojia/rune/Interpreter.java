@@ -201,11 +201,13 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
     public Void visitClassStmt(Stmt.Class stmt) {
         // Check superclass ast actually represents a RuneClass object
         Object superClass = null;
+        RuneMetaClass metaSuperClass = null;
         if (stmt.superClass != null) {
             superClass = evaluate(stmt.superClass);
             if (!(superClass instanceof RuneClass)) {
                 throw new RuntimeError(stmt.superClass.name, "Superclass must be a class.");
             }
+            metaSuperClass = (RuneMetaClass) ((RuneClass) superClass).runeClassDesc;
         }
 
         environment.define(stmt.name.lexeme, null);
@@ -227,7 +229,9 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
             classMethods.put(classMethod.name.lexeme, function);
         }
 
-        RuneMetaClass metaClass = new RuneMetaClass(stmt.name.lexeme, classMethods);
+        //RuneMetaClass metaSuperClass = new RuneMetaClass((RuneClass) superClass, classMethods);
+        RuneMetaClass metaClass  = new RuneMetaClass(stmt.name.lexeme, metaSuperClass, classMethods);
+
         RuneClass runeClass = new RuneClass(metaClass, stmt.name.lexeme, (RuneClass) superClass, methods);
         environment.assign(stmt.name, runeClass);
 
