@@ -9,12 +9,14 @@ import java.util.Map;
 
 public class RuneClass extends RuneInstance implements RuneCallable, RuneClassDesc {
     public final String name;
+    private final RuneClass superClass;
     private final Map<String, RuneFunction> methods;
 
 
-    public RuneClass(RuneMetaClass metaClass, String name, Map<String, RuneFunction> methods) {
+    public RuneClass(RuneMetaClass metaClass, String name, RuneClass superClass, Map<String, RuneFunction> methods) {
         super(metaClass);
         this.name = name;
+        this.superClass = superClass;
         this.methods = methods;
     }
 

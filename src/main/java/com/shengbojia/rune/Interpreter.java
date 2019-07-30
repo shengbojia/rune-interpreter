@@ -199,16 +199,28 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
     @Override
     public Void visitClassStmt(Stmt.Class stmt) {
+        // Check superclass ast actually represents a RuneClass object
+        Object superClass = null;
+        if (stmt.superClass != null) {
+            superClass = evaluate(stmt.superClass);
+            if (!(superClass instanceof RuneClass)) {
+                throw new RuntimeError(stmt.superClass.name, "Superclass must be a class.");
+            }
+        }
+
         environment.define(stmt.name.lexeme, null);
 
+        // instance methods belong to the class
         Map<String, RuneFunction> methods = new HashMap<>();
-        Map<String, RuneFunction> classMethods = new HashMap<>();
         for (Stmt.Function method : stmt.methods) {
             RuneFunction function = new RuneFunction(method, environment,
                     method.name.lexeme.equals("init"));
 
             methods.put(method.name.lexeme, function);
         }
+
+        // class methods belong to the metaclass
+        Map<String, RuneFunction> classMethods = new HashMap<>();
         for (Stmt.Function classMethod : stmt.classMethods) {
             RuneFunction function = new RuneFunction(classMethod, environment, false);
 
@@ -216,7 +228,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
         }
 
         RuneMetaClass metaClass = new RuneMetaClass(stmt.name.lexeme, classMethods);
-        RuneClass runeClass = new RuneClass(metaClass, stmt.name.lexeme, methods);
+        RuneClass runeClass = new RuneClass(metaClass, stmt.name.lexeme, (RuneClass) superClass, methods);
         environment.assign(stmt.name, runeClass);
 
         return null;

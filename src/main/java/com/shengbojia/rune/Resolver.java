@@ -136,6 +136,15 @@ public class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
         declare(stmt.name);
         define(stmt.name);
 
+
+        if (stmt.superClass != null) {
+            // weird edge case: class foo : foo {}
+            if (stmt.name.lexeme.equals(stmt.superClass.name.lexeme)) {
+                Rune.error(stmt.superClass.name, "A class cannot inherit from itself.");
+            }
+            resolve(stmt.superClass);
+        }
+
         // push a new scope and define "this" as a variable
         beginScope();
         scopes.peek().put("this", true);

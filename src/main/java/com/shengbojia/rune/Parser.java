@@ -69,14 +69,23 @@ public class Parser {
     }
 
     /**
-     * classDeclaration  -> "class" IDENTIFIER "{" function* "}" ;
+     * classDeclaration  -> "class" IDENTIFIER ( ":" IDENTIFIER)?
+     *                      "{" function* "}" ;
      */
     private Stmt classDeclaration() {
         Token name = consume(IDENTIFIER, "Class declaration requires a name.");
+
+        Expr.Variable superClass = null;
+        if (match(COLON)) {
+            consume(IDENTIFIER, "Expected a superclass name after ':'.");
+            superClass = new Expr.Variable(previous());
+        }
+
         consume(LEFT_BRACE, "Expect '{' before class body.");
 
         List<Stmt.Function> methods = new ArrayList<>();
         List<Stmt.Function> classMethods = new ArrayList<>();
+
         while (!check(RIGHT_BRACE) && !reachedEnd()) {
             if (match(STATIC)) {
                 classMethods.add(function("class method"));
@@ -84,9 +93,9 @@ public class Parser {
                 methods.add(function("method"));
             }
         }
-
         consume(RIGHT_BRACE, "Expect closing '}' after class body.");
-        return new Stmt.Class(name, methods, classMethods);
+
+        return new Stmt.Class(name, superClass, methods, classMethods);
     }
 
     /**
