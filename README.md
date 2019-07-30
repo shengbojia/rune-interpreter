@@ -13,6 +13,7 @@ Rune is a dynamically-typed, OOP "mini-language" I made to learn interpreters an
     * [Arithmetic](#arithmetic)
     * [Comparison & Equality](#comparison--equality)
       * [Truthiness in Rune](#what-is-truthy-in-rune)
+    * [Operator Precedence](#precedence)
 
 ## The Interpreter
 
