@@ -237,3 +237,8 @@ Operator precendence is very similar to C, as can be seen in this precendence ta
         </tr>
     </tbody>
 </table>
+
+And just like C, parentheses around an expression groups it into the highest precedence.
+```C
+(3 + 2) * 5; // evaluates to 25
+```
