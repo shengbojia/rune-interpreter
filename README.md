@@ -10,6 +10,9 @@ Rune is a dynamically-typed, OOP "mini-language" I made to learn interpreters an
   * [Intro to Rune](#an-introduction-to-rune)
   * [Data Types](#data-types)
   * [Expressions](#expressions)
+    * [Arithmetic](#arithmetic)
+    * [Comparison & Equality](#comparison--equality)
+      * [Truthiness in Rune](#what-is-truthy-in-rune)
 
 ## The Interpreter
 
@@ -124,3 +127,112 @@ And ```==``` works similar to java's ```equals()```:
 42 == "42";     // false (different types are never equal)
 nil == nil;     // true (nil is ONLY equal to nil)
 ```
+
+#### Logical Operators
+The not operator `!` returns `false` if the operand is true, and vice versa:
+```C
+!true;  // evaluates to false
+!false; // evaluates to true
+```
+Rune uses keywords ```and``` and ```or``` to represent similar C operators ```&&``` and ```||```:
+```Kotlin
+true and false; // false
+true and true;  // true
+
+false or false; // false
+false or true;  // true
+```
+Both operators **short circuit**, meaning if the left operand of ```and``` is false, the expression automatically evalutes to false and the right operand is discarded without even being evaluated. In a similar fashion, for ```or``` if the left operand is true then the expression automatically evalutes to true and the right oprand is discarded.
+
+##### What is truthy in Rune?
+Rune follows Ruby's rule: `false` and `nil` are *falsey* and everything else is *truthy*. (meaning treated as `false` or `true` by logical operators, respectively)
+
+#### Precedence
+Operator precendence is very similar to C, as can be seen in this precendence table:
+
+<table>
+    <thead>
+        <tr>
+            <th>Precendence</th>
+            <th>Operator</th>
+            <th>Description</th>
+            <th>Associativity</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan=2>1</td>
+            <td>()</td>
+            <td>Function call</td>
+            <td rowspan=2>left-to-right</td>
+        </tr>
+        <tr>
+            <td>.</td>
+            <td>Member access</td>
+        </tr>
+        <tr>
+            <td rowspan=2>2</td>
+            <td>!</td>
+            <td>Logical NOT</td>
+            <td rowspan=2>right-to-left</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>Unary minus</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>* &nbsp;/</td>
+            <td>Multiplication and division</td>
+            <td rowspan=6>left-to-right</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>+ &nbsp;-</td>
+          <td>Addition and subtraction</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>&lt; &nbsp;&lt;=<br>&gt; &nbsp;&gt;= </td>
+          <td>Comparison operators</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>== &nbsp;!=</td>
+          <td>Equals and not equals.</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>and</td>
+          <td>Logical AND</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>or</td>
+          <td>Logical OR</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>lambda</td>
+          <td>Lambda expression</td>
+          <td>n/a</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>?:</td>
+          <td>Ternary conditional</td>
+          <td rowspan=2>right-to-left</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>=</td>
+          <td>Assignment</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>,</td>
+          <td>C-style comma operator</td>
+          <td>left-to-right</td>
+        </tr>
+    </tbody>
+</table>
