@@ -1,0 +1,8 @@
+class Foo {
+    static funbar(n) {
+        print n;
+    }
+}
+
+Foo.funbar(3); // expect: 3
+

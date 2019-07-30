@@ -1,0 +1,20 @@
+class Klass {
+
+    init() {
+        print "initializing";
+    }
+
+    static foo(n) {
+        print "static " + n;
+    }
+
+    funbar() {
+        print this.nonStaticField;
+    }
+}
+
+Klass.foo(1);            // expect 'static 1'
+var inst = Klass();      // expect 'initializing'
+Klass.foo(1);            // expect 'static 1'
+inst.nonStaticField = 2;
+inst.funbar();           // expect 2;

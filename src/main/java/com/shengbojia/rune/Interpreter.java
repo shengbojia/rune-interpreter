@@ -202,14 +202,21 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
         environment.define(stmt.name.lexeme, null);
 
         Map<String, RuneFunction> methods = new HashMap<>();
+        Map<String, RuneFunction> classMethods = new HashMap<>();
         for (Stmt.Function method : stmt.methods) {
             RuneFunction function = new RuneFunction(method, environment,
                     method.name.lexeme.equals("init"));
 
             methods.put(method.name.lexeme, function);
         }
+        for (Stmt.Function classMethod : stmt.classMethods) {
+            RuneFunction function = new RuneFunction(classMethod, environment, false);
 
-        RuneClass runeClass = new RuneClass(stmt.name.lexeme, methods);
+            classMethods.put(classMethod.name.lexeme, function);
+        }
+
+        RuneMetaClass metaClass = new RuneMetaClass(stmt.name.lexeme, classMethods);
+        RuneClass runeClass = new RuneClass(metaClass, stmt.name.lexeme, methods);
         environment.assign(stmt.name, runeClass);
 
         return null;

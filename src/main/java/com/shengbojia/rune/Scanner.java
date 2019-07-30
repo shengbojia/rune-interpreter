@@ -43,6 +43,7 @@ public class Scanner {
         keywords.put("var", VAR);
         keywords.put("while", WHILE);
         keywords.put("lambda", LAMBDA);
+        keywords.put("static", STATIC);
     }
 
     Scanner(String source) {
