@@ -11,7 +11,7 @@ class Toggle {
   }
 }
 
-class NthToggle < Toggle {
+class NthToggle : Toggle {
   init(startState, maxCounter) {
     super.init(startState);
     this.countMax = maxCounter;
