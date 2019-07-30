@@ -10,11 +10,11 @@ import java.util.Map;
  * Similar to Python, I will be allowing for fields to be added dynamically to object instances.
  */
 public class RuneInstance {
-    private RuneClass runeClass;
+    RuneClassDesc runeClassDesc;
     private final Map<String, Object> fields = new HashMap<>();
 
-    RuneInstance(RuneClass runeClass) {
-        this.runeClass = runeClass;
+    RuneInstance(RuneClassDesc runeClassDesc) {
+        this.runeClassDesc = runeClassDesc;
     }
 
     public Object getProperty(Token name) {
@@ -25,7 +25,7 @@ public class RuneInstance {
         }
 
         // If not matching field is found, try looking for a method
-        RuneFunction method = runeClass.findMethod(name.lexeme);
+        RuneFunction method = runeClassDesc.findMethod(name.lexeme);
         if (method != null) {
             // a new method ref with instance ref "this" in its closure
             return method.bind(this);
@@ -40,6 +40,6 @@ public class RuneInstance {
 
     @Override
     public String toString() {
-        return runeClass.name + " instance";
+        return runeClassDesc.getName() + " instance";
     }
 }

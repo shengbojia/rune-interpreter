@@ -1,20 +1,35 @@
 package com.shengbojia.rune.callables;
 
 import com.shengbojia.rune.Interpreter;
+import com.shengbojia.rune.throwables.RuntimeError;
+import com.shengbojia.rune.token.Token;
 
 import java.util.List;
 import java.util.Map;
 
-public class RuneClass implements RuneCallable {
+public class RuneClass extends RuneInstance implements RuneCallable, RuneClassDesc {
     public final String name;
     private final Map<String, RuneFunction> methods;
 
-    public RuneClass(String name, Map<String, RuneFunction> methods) {
+
+    public RuneClass(RuneMetaClass metaClass, String name, Map<String, RuneFunction> methods) {
+        super(metaClass);
         this.name = name;
         this.methods = methods;
     }
 
-    RuneFunction findMethod(String name) {
+    @Override
+    public RuneFunction getProperty(Token name) {
+        RuneFunction classMethod = super.runeClassDesc.findMethod(name.lexeme);
+        if (classMethod != null) {
+            return classMethod;
+        }
+
+        throw new RuntimeError(name, "No such static method found: " + name.lexeme + ".");
+    }
+
+    @Override
+    public RuneFunction findMethod(String name) {
         if (methods.containsKey(name)) {
             return methods.get(name);
         }
@@ -42,6 +57,11 @@ public class RuneClass implements RuneCallable {
             return 0;
         }
         return initializer.arity();
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     @Override
